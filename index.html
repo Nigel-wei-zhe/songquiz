@@ -135,7 +135,7 @@ button:disabled{opacity:.4}
   <div class="lbl">關卡（照順序進行，可以多選）</div>
   <div id="modes"></div>
 
-  <div class="lbl">改編題庫</div>
+  <div class="lbl">題庫（可以多選）</div>
   <div class="pills" id="sets"></div>
 
   <div class="lbl">題數</div>
@@ -199,12 +199,10 @@ button:disabled{opacity:.4}
 <script>
 {
 // ===== 資料與設定 =====
-const SETS = [ // 改編題庫分組
-  {k:'bj',  n:'黑杰倫爵士', src:['黑杰倫']},
-  {k:'band',n:'樂團重新詮釋', src:['滾石唱片 ROCK RECORDS']},
-  {k:'rnb', n:'R&B 老歌', src:['Capybara96']},
-  {k:'edm', n:'EDM', src:['Priscilla Abby 蔡恩雨']},
-  {k:'acap',n:'阿卡貝拉', src:['尋人啟事 The Wanted']},
+const SETS = [ // 題庫分類（使用者定：黑杰倫／翻唱／原唱）；src 對 songs.json 的 set，原唱是 orig.json
+  {k:'bj',   n:'黑杰倫', src:['黑杰倫']},
+  {k:'cover',n:'翻唱',   src:['滾石唱片 ROCK RECORDS', 'Capybara96', 'Priscilla Abby 蔡恩雨', '尋人啟事 The Wanted']},
+  {k:'orig', n:'原唱'},
 ];
 // 關卡：每一段（step）有自己的影片、長度、分數、提示
 const MODES = {
@@ -224,6 +222,7 @@ const LS = 'sqCfg3', LSP = 'sqPlayed';
 let ALL = [], ORIG = [];
 let cfg = {players:['玩家 1','玩家 2','玩家 3'], sets:SETS.map(s => s.k), modes:[...ORDER], nq:10};
 try { Object.assign(cfg, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+if (!cfg.sets.length || cfg.sets.some(k => !SETS.some(s => s.k === k))) cfg.sets = SETS.map(s => s.k); // 舊版分組 → 全選
 let G = null, player = null, ytReady = false, loaded = '', stopAt = 0, tick = null, wake = null;
 window.__dbg = {get G() { return G; }, get ORIG() { return ORIG; }}; // 測試用
 
@@ -234,6 +233,10 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const save = () => { try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch (e) {} };
 const setOf = x => SETS.find(s => s.src.includes(x.set || x.channel));
 const covers = () => ALL.filter(x => !x.skip && cfg.sets.includes(setOf(x)?.k));
+const origs = () => cfg.sets.includes('orig') ? ORIG.filter(o => !o.skip) : [];
+const setCount = s => s.k === 'orig' ? ORIG.filter(o => !o.skip).length : ALL.filter(x => !x.skip && setOf(x) === s).length;
+// 各關需要的題庫：前奏秒殺只用原唱、改編三段式只用改編、猜原唱兩種都行
+const canMode = k => k === 'intro' || k === 'next' ? origs().length > 0 : k === 'ladder' ? covers().length > 0 : covers().length + origs().length > 0;
 const origOf = song => ORIG.find(o => o.song === song && !o.skip);
 const startOf = v => v.start != null ? v.start : DEF_START;
 
@@ -242,7 +245,7 @@ function paintSetup() {
   $('plist').innerHTML = cfg.players.map((n, i) => `<div class="pl"><input value="${esc(n)}" data-i="${i}" maxlength="8" enterkeyhint="done"><button data-del="${i}" aria-label="移除">✕</button></div>`).join('');
   $('modes').innerHTML = ORDER.map(k => { const m = MODES[k];
     return `<button class="md${cfg.modes.includes(k) ? ' on' : ''}" data-md="${k}"><b>${m.n}</b><span>${m.d}</span></button>`; }).join('');
-  $('sets').innerHTML = SETS.map(s => { const c = ALL.filter(x => !x.skip && setOf(x) === s).length;
+  $('sets').innerHTML = SETS.map(s => { const c = setCount(s);
     return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : ''; }).join('');
   $('nq').innerHTML = [6, 10, 15, 20].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
 }
@@ -265,7 +268,10 @@ $('setup').addEventListener('click', e => {
 $('start').onclick = () => {
   cfg.players = cfg.players.map((n, i) => n.trim() || '玩家 ' + (i + 1)); save();
   if (!cfg.modes.length) return toast('至少選一個關卡');
-  if (!covers().length && cfg.modes.some(k => k !== 'intro')) return toast('至少選一個改編題庫');
+  if (!cfg.sets.length) return toast('至少選一個題庫');
+  const bad = cfg.modes.filter(k => !canMode(k));
+  if (bad.length === cfg.modes.length) return toast(bad.includes('intro') ? '前奏秒殺要勾「原唱」' : '改編三段式要勾「黑杰倫」或「翻唱」');
+  if (bad.length) toast(`略過${bad.map(k => MODES[k].n).join('、')}（題庫沒勾到）`);
   newGame();
 };
 
@@ -273,20 +279,19 @@ $('start').onclick = () => {
 function buildQuestions() {
   let played = [];
   try { played = JSON.parse(localStorage.getItem(LSP) || '[]'); } catch (e) {}
-  const modes = ORDER.filter(k => cfg.modes.includes(k));
+  const modes = ORDER.filter(k => cfg.modes.includes(k) && canMode(k));
   const per = modes.map((k, i) => Math.floor(cfg.nq / modes.length) + (i < cfg.nq % modes.length ? 1 : 0));
   const used = new Set(), qs = [];
   const fresh = arr => { const f = arr.filter(x => !played.includes(x.yt)), o = arr.filter(x => played.includes(x.yt));
     const sh = a => a.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(v => v[1]);
     return [...sh(f), ...sh(o)]; };
-  const songsInSets = new Set(covers().map(x => x.song));
   modes.forEach((k, mi) => {
     let cand;
-    if (k === 'intro') cand = fresh(ORIG.filter(o => !o.skip && (songsInSets.has(o.song) || !songsInSets.size)));
+    if (k === 'intro') cand = fresh(origs());
     else if (k === 'ladder') { const c = fresh(covers()); cand = [...c.filter(x => origOf(x.song)), ...c.filter(x => !origOf(x.song))]; }
-    else if (k === 'next') cand = fresh(ORIG.filter(o => !o.skip && hasStop(o)));
+    else if (k === 'next') cand = fresh(origs().filter(hasStop));
     else { // 猜原唱：約三分之一出原曲
-      const c = fresh(covers()), o = fresh(ORIG.filter(o => !o.skip));
+      const c = fresh(covers()), o = fresh(origs());
       cand = []; while (c.length || o.length) { if (o.length && (cand.length % 3 === 2 || !c.length)) cand.push(o.shift()); else cand.push(c.shift()); }
     }
     let n = 0;
