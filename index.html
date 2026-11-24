@@ -24,6 +24,7 @@ button:active{transform:scale(.97)}
 .big{width:100%;max-width:420px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:22px;letter-spacing:.15em;text-indent:.15em;padding:18px;border-radius:18px}
 .main{border-color:var(--pinkL);color:var(--core);background:linear-gradient(#2a0a26,#16061a);box-shadow:0 0 0 2px #5a2a50,0 0 14px var(--pink),inset 0 0 14px rgba(255,47,174,.5);text-shadow:0 0 8px var(--pink)}
 .sub{border-color:#2f5a6a;color:var(--cyanL)}
+button:disabled{opacity:.4}
 .row{display:flex;gap:10px;width:100%;max-width:420px}
 .row>button{flex:1}
 .lbl{width:100%;max-width:420px;color:var(--cyanL);font-size:13px;letter-spacing:.1em;margin-top:6px}
@@ -112,6 +113,9 @@ button:active{transform:scale(.97)}
   <div class="lbl">題庫</div>
   <div class="pills" id="sets"></div>
 
+  <div class="lbl">難度</div>
+  <div class="pills" id="lv"></div>
+
   <div class="lbl">題數</div>
   <div class="pills" id="nq"></div>
 
@@ -136,7 +140,7 @@ button:active{transform:scale(.97)}
   <div id="pPlay" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%">
   <div id="hint" class="neonC"></div>
   <button class="big main" id="bMain">播放</button>
-  <div class="row"><button class="sub" id="bMore">再聽 10 秒</button><button class="sub" id="bAgain">從頭再聽</button></div>
+  <div class="row"><button class="sub" id="bMore">再聽 10 秒</button><button class="sub" id="bAgain">從頭再聽</button><button class="sub" id="bHint">提示</button></div>
   <div class="row"><button id="bBad" style="color:var(--dim);border-color:#2a1d36">這首播不了，換一首</button></div>
   </div>
   <div id="pRev" style="display:none;flex-direction:column;align-items:center;gap:14px;width:100%">
@@ -173,7 +177,7 @@ const SETS = [ // 題庫分組：key → 顯示名稱、哪些來源
 const DEF_START = 30;
 const LS = 'sqCfg', LSP = 'sqPlayed';
 let ALL = [];
-let cfg = Object.assign({players:['玩家 1','玩家 2','玩家 3'], sets:['bj','band','rnb','edm','acap'], nq:10, clip:20}, JSON.parse(localStorage.getItem(LS) || '{}'));
+let cfg = Object.assign({players:['玩家 1','玩家 2','玩家 3'], sets:['bj','band','rnb','edm','acap'], nq:10, clip:20, lv:'mid'}, JSON.parse(localStorage.getItem(LS) || '{}'));
 let G = null;            // 一局的狀態
 let player = null, ytReady = false, stopAt = 0, tick = null, wake = null;
 
@@ -184,6 +188,10 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const save = () => localStorage.setItem(LS, JSON.stringify(cfg));
 const setOf = x => SETS.find(s => s.src.includes(x.set || x.channel));
 const pool = () => ALL.filter(x => !x.skip && cfg.sets.includes(setOf(x)?.k));
+// 難度＝原曲佔幾成；原曲只出選中題庫裡有的歌
+const LV = [{k:'easy',n:'簡單',d:'大多是原曲',r:.7},{k:'mid',n:'普通',d:'原曲改編各半',r:.4},{k:'hard',n:'困難',d:'全部改編',r:0}];
+let ORIG = [];
+const origPool = () => { const ss = new Set(pool().map(x => x.song)); return ORIG.filter(x => !x.skip && ss.has(x.song)); };
 
 // ===== 開場畫面 =====
 function paintSetup() {
@@ -192,6 +200,7 @@ function paintSetup() {
     const c = ALL.filter(x => !x.skip && setOf(x) === s).length;
     return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : '';
   }).join('');
+  $('lv').innerHTML = LV.map(l => `<button class="pill${cfg.lv === l.k ? ' on' : ''}" data-lv="${l.k}">${l.n}<small>${l.d}</small></button>`).join('');
   $('nq').innerHTML = [10, 15, 20, 30].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
   $('cl').innerHTML = [10, 15, 20, 30].map(n => `<button class="pill${cfg.clip === n ? ' on' : ''}" data-cl="${n}">${n} 秒</button>`).join('') ;
 }
@@ -205,6 +214,7 @@ $('addP').onclick = () => { if (cfg.players.length >= 10) return toast('最多 1
 $('setup').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   if (b.dataset.set) { const k = b.dataset.set, i = cfg.sets.indexOf(k); i >= 0 ? cfg.sets.splice(i, 1) : cfg.sets.push(k); }
+  else if (b.dataset.lv) cfg.lv = b.dataset.lv;
   else if (b.dataset.nq) cfg.nq = +b.dataset.nq;
   else if (b.dataset.cl) cfg.clip = +b.dataset.cl;
   else return;
@@ -219,10 +229,19 @@ $('start').onclick = () => {
 // ===== 出題：避開最近玩過的 =====
 function pickSongs(n) {
   let played = JSON.parse(localStorage.getItem(LSP) || '[]');
-  let p = pool(), fresh = p.filter(x => !played.includes(x.yt));
-  if (fresh.length < n) { played = played.filter(y => !p.some(x => x.yt === y)); fresh = p; } // 這組題庫玩完一輪就重來
-  const out = [...fresh].sort(() => Math.random() - .5).slice(0, n);
-  localStorage.setItem(LSP, JSON.stringify([...played, ...out.map(x => x.yt)].slice(-600)));
+  const draw = (p, k, avoid) => { // 從 p 抽 k 首，先抽沒玩過的，同一首歌不重複
+    p = p.filter(x => !avoid.has(x.song));
+    const fresh = p.filter(x => !played.includes(x.yt)).sort(() => Math.random() - .5);
+    const old = p.filter(x => played.includes(x.yt)).sort(() => Math.random() - .5);
+    const out = [];
+    for (const x of [...fresh, ...old]) { if (out.length >= k) break; if (!avoid.has(x.song)) { out.push(x); avoid.add(x.song); } }
+    return out;
+  };
+  const r = (LV.find(l => l.k === cfg.lv) || LV[1]).r, avoid = new Set();
+  const o = draw(origPool(), Math.round(n * r), avoid);
+  const c = draw(pool(), n - o.length, avoid);
+  const out = [...o, ...c].sort(() => Math.random() - .5);
+  localStorage.setItem(LSP, JSON.stringify([...played.filter(y => !out.some(x => x.yt === y)), ...out.map(x => x.yt)].slice(-400)));
   return out;
 }
 
@@ -238,7 +257,8 @@ function newGame() {
 // st: 'ready' | 'play' | 'pause'
 function question() {
   const q = G.qs[G.i];
-  G.st = 'ready'; G.heard = 0; G.got = new Set();
+  G.st = 'ready'; G.heard = 0; G.got = new Set(); G.hint = 0;
+  $('bHint').textContent = '提示'; $('bHint').disabled = false;
   $('qn').textContent = G.i + 1;
   phase('play');
   $('cover').classList.remove('off');
@@ -247,7 +267,7 @@ function question() {
   $('eq').classList.remove('go');
   $('hint').innerHTML = '';
   $('bMain').textContent = '播放';
-  $('bMore').style.visibility = $('bAgain').style.visibility = 'hidden';
+  $('bMore').style.visibility = $('bAgain').style.visibility = $('bHint').style.visibility = 'hidden';
   show('game');
   if (ytReady) player.cueVideoById({videoId: q.yt, startSeconds: startOf(q)});
 }
@@ -262,9 +282,9 @@ function playFrom(t, len) {
   G.st = 'play';
   $('eq').classList.add('go');
   $('coverTx').textContent = '';
-  $('hint').innerHTML = '蓋上手機！<small>大家搶著喊出原曲</small>';
+  if (!G.hint) $('hint').innerHTML = '蓋上手機！<small>大家搶著喊出原曲</small>';
   $('bMain').textContent = '公布答案';
-  $('bMore').style.visibility = $('bAgain').style.visibility = 'visible';
+  $('bMore').style.visibility = $('bAgain').style.visibility = $('bHint').style.visibility = 'visible';
   clearInterval(tick); tick = setInterval(onTick, 200);
 }
 function onTick() {
@@ -283,7 +303,7 @@ function onTick() {
     player.pauseVideo(); G.st = 'pause'; clearInterval(tick);
     $('eq').classList.remove('go');
     $('coverTx').textContent = '時間到';
-    $('hint').innerHTML = '猜到了嗎？<small>翻開手機公布答案，或再聽 10 秒</small>';
+    if (!G.hint) $('hint').innerHTML = '猜到了嗎？<small>翻開公布答案，或再聽、看提示</small>';
     beep();
   }
 }
@@ -299,6 +319,15 @@ $('bMore').onclick = () => { // 從停下的地方往後多聽 10 秒
 };
 $('bAgain').onclick = () => { G.len = cfg.clip; playFrom(startOf(G.qs[G.i]), cfg.clip); };
 $('bBad').onclick = () => skipBad();
+$('bHint').onclick = () => { // 第一次：字數＋第一個字；第二次：原唱
+  const q = G.qs[G.i], chars = [...q.song];
+  G.hint = Math.min(2, G.hint + 1);
+  let h = `${chars.length} 個字，第一個字「${esc(chars[0])}」`;
+  if (G.hint >= 2) h += `<small>原唱：${esc(q.artist)}</small>`;
+  $('hint').innerHTML = h;
+  $('bHint').textContent = G.hint >= 2 ? '提示已用完' : '再一個提示';
+  $('bHint').disabled = G.hint >= 2;
+};
 function skipBad() {
   // 換一首同題庫的，沒有就跳過
   const used = new Set(G.qs.map(x => x.yt));
@@ -319,7 +348,7 @@ function reveal() {
   $('ansSong').textContent = q.song;
   $('ansSong').style.animation = 'none'; void $('ansSong').offsetWidth; $('ansSong').style.animation = '';
   $('ansMeta').innerHTML = `${esc(q.artist)}${q.year ? '　<span class="y">' + q.year + '</span>' : ''}`;
-  $('ansStyle').textContent = q.style || '';
+  $('ansStyle').textContent = q.orig ? '原曲' : (q.style || '改編');
   paintChips();
   $('bNext').textContent = G.i + 1 >= G.qs.length ? '看排名' : '下一題';
 }
@@ -386,7 +415,10 @@ window.onYouTubeIframeAPIReady = () => {
   });
 };
 
-fetch('data/songs.json').then(r => r.json()).then(d => { ALL = d; paintSetup(); });
+Promise.all([
+  fetch('data/songs.json').then(r => r.json()),
+  fetch('data/orig.json').then(r => r.ok ? r.json() : []).catch(() => [])
+]).then(([d, o]) => { ALL = d; ORIG = o; paintSetup(); });
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
