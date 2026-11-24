@@ -7,142 +7,195 @@
 <meta name="theme-color" content="#07050C">
 <title>原曲是哪首？</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@900&family=DotGothic16&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@900&family=DotGothic16&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07050C;--glass:#120A1A;--pink:#ff2fae;--pinkL:#ff8ad8;--core:#fff6fc;--cyan:#14c8ff;--cyanL:#7fe9ff;--amber:#ffc35a;--red:#ff4d5e;--green:#4dffa6;--dim:#8a7f99;
-  --pt:env(safe-area-inset-top);--pb:env(safe-area-inset-bottom)}
+:root{--bg:#07050C;--glass:#120A1A;--glass2:#1a1024;--line:#2a1d36;--pink:#ff2fae;--pinkL:#ff8ad8;--core:#fff6fc;--cyan:#14c8ff;--cyanL:#7fe9ff;--amber:#ffc35a;--red:#ff4d5e;--green:#4dffa6;
+  --tx2:#b3a6c4;--tx3:#8f82a3;--dim:#8f82a3;--pt:env(safe-area-inset-top);--pb:env(safe-area-inset-bottom);--w:440px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;background:var(--bg);color:#eee;font:16px/1.5 "Noto Sans TC",system-ui,sans-serif;overflow:hidden;user-select:none;-webkit-user-select:none}
 body{background:radial-gradient(ellipse at 50% -10%,#3a0f3a 0%,transparent 55%),radial-gradient(ellipse at 50% 120%,#0b2a3a 0%,transparent 55%),var(--bg)}
+::selection{background:#ff2fae55;color:#fff}
+svg{display:block;flex:none}
 .neon{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;color:var(--core);text-shadow:0 0 4px var(--pinkL),0 0 12px var(--pink),0 0 28px var(--pink)}
 .neonC{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;color:#effcff;text-shadow:0 0 4px var(--cyanL),0 0 12px var(--cyan)}
-.num{font-family:"DotGothic16",monospace;color:var(--amber)}
-.scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;padding:calc(16px + var(--pt)) 20px calc(20px + var(--pb));gap:14px;overflow-y:auto}
+.num{font-family:"DotGothic16",monospace;color:var(--amber);font-variant-numeric:tabular-nums}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;padding:calc(14px + var(--pt)) 18px calc(16px + var(--pb));gap:12px;overflow-y:auto;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
 .scr.on{display:flex}
-button{font:inherit;color:#eee;background:var(--glass);border:2px solid #3a2a48;border-radius:14px;padding:12px 16px;cursor:pointer;touch-action:manipulation}
+.scr>*{width:100%;max-width:var(--w);flex:none}
+button{font:inherit;color:#eee;background:var(--glass);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;cursor:pointer;touch-action:manipulation;transition:border-color .2s,box-shadow .2s,background .2s,color .2s}
 button:active{transform:scale(.97)}
 button:disabled{opacity:.4}
-.big{width:100%;max-width:420px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:22px;letter-spacing:.15em;text-indent:.15em;padding:18px;border-radius:18px;flex:none}
-.main{border-color:var(--pinkL);color:var(--core);background:linear-gradient(#2a0a26,#16061a);box-shadow:0 0 0 2px #5a2a50,0 0 14px var(--pink),inset 0 0 14px rgba(255,47,174,.5);text-shadow:0 0 8px var(--pink)}
-.sub{border-color:#2f5a6a;color:var(--cyanL)}
-.row{display:flex;gap:10px;width:100%;max-width:420px}
-.row>button{flex:1}
-.lbl{width:100%;max-width:420px;color:var(--cyanL);font-size:13px;letter-spacing:.1em;margin-top:6px}
-.pills{display:flex;flex-wrap:wrap;gap:8px;width:100%;max-width:420px}
-.pill{padding:9px 14px;border-radius:999px;font-size:15px;border-color:#33243f;color:#a99bb8}
-.pill.on{border-color:var(--cyanL);color:#fff;box-shadow:0 0 10px var(--cyan),inset 0 0 8px rgba(20,200,255,.4)}
-.pill small{color:var(--dim);margin-left:4px}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--cyanL);outline-offset:2px}
+.big{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:22px;letter-spacing:.15em;text-indent:.15em;height:62px;padding:0 18px 2px;border-radius:18px}
+.main{border:2px solid var(--pinkL);color:var(--core);background:linear-gradient(#2a0a26,#16061a);box-shadow:0 0 0 2px #5a2a50,0 0 16px var(--pink),inset 0 0 14px rgba(255,47,174,.5);text-shadow:0 0 8px var(--pink)}
+.sub{border-color:#1f4f60;color:var(--cyanL)}
+.ghost{background:none;border:0;color:var(--tx3);font-size:13px;padding:8px 12px}
+.row{display:flex;gap:10px}
+.row>button{flex:1;min-width:0}
 
-/* 開場 */
-#title{font-size:38px;margin-top:10px;text-align:center;line-height:1.2}
-#tagline{color:var(--dim);font-size:13px;margin-top:-6px;text-align:center}
-#plist{display:flex;flex-direction:column;gap:8px;width:100%;max-width:420px}
-.pl{display:flex;gap:8px;align-items:center}
-.pl input{flex:1;font:inherit;font-size:17px;color:#fff;background:var(--glass);border:2px solid #33243f;border-radius:12px;padding:10px 12px;outline:none;user-select:text;-webkit-user-select:text}
+/* ===== 開場 ===== */
+#setup{padding-bottom:0;gap:0}
+.hero{text-align:center;padding:14px 0 6px}
+#title{font-size:38px;line-height:1.2}
+#tagline{color:var(--tx2);font-size:13px;margin-top:4px}
+.sec{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.lbl{display:flex;align-items:baseline;gap:8px;color:var(--cyanL);font-size:13px;font-weight:700;letter-spacing:.08em}
+.lbl small{color:var(--tx3);font-weight:400;letter-spacing:0}
+.lbl a{margin-left:auto;color:var(--pinkL);text-decoration:none;font-weight:400;letter-spacing:0;display:flex;align-items:center;gap:2px}
+#plist{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pl{position:relative}
+.pl input{width:100%;height:46px;font:inherit;font-size:16px;color:#fff;caret-color:var(--pinkL);background:var(--glass);border:1.5px solid var(--line);border-radius:12px;padding:0 38px 0 14px;outline:none;user-select:text;-webkit-user-select:text;transition:border-color .2s}
 .pl input:focus{border-color:var(--pinkL)}
-.pl button{width:46px;padding:10px 0;color:var(--dim)}
-#addP{width:100%;max-width:420px;border-style:dashed;color:var(--dim)}
-#modes{display:flex;flex-direction:column;gap:8px;width:100%;max-width:420px}
-.md{text-align:left;padding:12px 14px;border-color:#33243f;color:#a99bb8;display:flex;flex-direction:column;gap:2px}
-.md b{font-size:17px;color:#cfc4dc}
-.md span{font-size:13px;color:var(--dim)}
-.md.on{border-color:var(--cyanL);box-shadow:0 0 10px var(--cyan),inset 0 0 8px rgba(20,200,255,.3)}
+.pl button{position:absolute;right:3px;top:3px;width:40px;height:40px;padding:0;border:0;background:none;color:var(--tx3);display:grid;place-items:center}
+#addP{height:44px;padding:0;border-style:dashed;color:var(--tx2);font-size:14px;display:flex;align-items:center;justify-content:center;gap:6px}
+#modes{display:flex;flex-direction:column;gap:8px}
+.md{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;color:var(--tx2)}
+.md .ck{width:26px;height:26px;border-radius:50%;border:1.5px solid #4a3a5a;display:grid;place-items:center;font:13px "DotGothic16";color:transparent;flex:none}
+.md .tx{flex:1;min-width:0}
+.md b{display:block;font-size:16px;color:#d8cde6}
+.md span.d{display:block;font-size:12.5px;color:var(--tx3);line-height:1.5;margin-top:1px}
+.md.on{border-color:#3d8fa8;background:#0d1a24}
+.md.on .ck{border-color:var(--cyanL);background:var(--cyan);color:#04121a;box-shadow:0 0 8px var(--cyan)}
 .md.on b{color:#fff}
-#how{color:var(--dim);font-size:13px;width:100%;max-width:420px;line-height:1.8}
-#how b{color:#ddd}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{height:40px;padding:0 15px;border-radius:999px;font-size:15px;color:var(--tx2)}
+.pill.on{border-color:var(--cyanL);color:#fff;background:#0d1a24;box-shadow:inset 0 0 8px rgba(20,200,255,.35)}
+.pill small{font:12px "DotGothic16";color:var(--tx3);margin-left:5px}
+.pill.on small{color:var(--amber)}
+#nq{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;background:var(--glass);border:1.5px solid var(--line);border-radius:14px}
+#nq .pill{height:38px;border:0;border-radius:10px;background:none;padding:0}
+#nq .pill.on{background:#0d1a24;box-shadow:inset 0 0 0 1.5px var(--cyanL)}
+#how{margin-top:22px;color:var(--tx3);font-size:13px;line-height:1.8}
+#how b{color:var(--tx2)}
+.dockb{position:sticky;bottom:0;margin-top:auto;padding:22px 0 calc(16px + var(--pb));background:linear-gradient(transparent,var(--bg) 30%);display:flex;flex-direction:column;gap:8px}
+#sumTx{text-align:center;font-size:13px;color:var(--tx2)}
 
-/* 關卡卡片 */
-#card{justify-content:center;text-align:center}
-#cardNo{color:var(--cyanL);letter-spacing:.3em;font-size:14px}
-#cardT{font-size:42px;line-height:1.2;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
-#cardD{color:#ddd;max-width:360px}
-#cardPts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:380px}
-#cardPts span{border:1px solid #3a2a48;border-radius:10px;padding:6px 10px;font-size:14px;color:#cfc4dc;background:var(--glass)}
-#cardPts b{color:var(--amber);font-family:"DotGothic16";font-weight:400;margin-left:4px}
+/* ===== 關卡卡片 ===== */
+#card{justify-content:center;text-align:center;gap:16px}
+#cardNo{color:var(--cyanL);letter-spacing:.3em;text-indent:.3em;font-size:14px}
+#cardT{font-size:44px;line-height:1.2;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+#cardD{color:var(--tx2);max-width:340px;margin:0 auto}
+.ladder{display:flex;gap:6px;justify-content:center}
+.ladder i{flex:1;max-width:110px;font-style:normal;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 4px;border-radius:12px;border:1.5px solid var(--line);background:var(--glass);color:var(--tx3);font-size:13px;transition:all .25s}
+.ladder i b{font:24px/1.1 "DotGothic16";color:var(--tx3);font-weight:400}
+.ladder i b::after{content:'分';font:12px "Noto Sans TC";margin-left:2px}
+.ladder i.on{border-color:var(--pinkL);color:#fff;background:#25102d;box-shadow:0 0 12px #ff2fae66}
+.ladder i.on b{color:var(--amber)}
+.ladder i.done{opacity:.4}
+#cardPts i{color:var(--tx2)}#cardPts i b{color:var(--amber)}
+#card .dockb{position:static;background:none;padding:12px 0 0;margin-top:0}
 
-/* 遊戲中 */
-#top{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--dim);gap:8px}
+/* ===== 遊戲中 ===== */
+#game{gap:10px}
+#top{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--tx3)}
 #top .q{font-size:18px}
-#modeTag{color:var(--cyanL);font-size:13px;border:1px solid #2f5a6a;border-radius:999px;padding:2px 10px;white-space:nowrap}
-#quit{padding:6px 12px;font-size:13px;color:var(--dim)}
-#stage{position:relative;width:100%;max-width:520px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;flex:none;border:2px solid #2a1d36}
+#modeTag{color:var(--cyanL);font-size:13px;border:1px solid #1f4f60;border-radius:999px;padding:2px 10px;white-space:nowrap;margin-right:auto}
+#quit{height:34px;padding:0 12px;font-size:13px;color:var(--tx3);border-radius:10px}
+#quit[data-arm]{border-color:var(--red);color:var(--red)}
+#prog{height:3px;border-radius:2px;background:var(--line);overflow:hidden}
+#prog i{display:block;height:100%;background:var(--pinkL);box-shadow:0 0 6px var(--pink);transition:width .4s}
+#stage{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000;border:1.5px solid var(--line);margin-top:4px}
 #player,#stage iframe{position:absolute;inset:0;width:100%;height:100%}
-#cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:radial-gradient(circle at 50% 45%,#2a0f2e,#0b0610 70%);z-index:2}
+#cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:radial-gradient(circle at 50% 45%,#2a0f2e,#0b0610 70%);z-index:2}
 #cover.off{display:none}
-#ring{--p:0;width:116px;height:116px;border-radius:50%;display:grid;place-items:center;
-  background:conic-gradient(var(--pink) calc(var(--p)*1turn),#2a1d36 0);box-shadow:0 0 18px rgba(255,47,174,.4)}
-#ring>div{width:96px;height:96px;border-radius:50%;background:#0d0712;display:grid;place-items:center;font-size:38px}
-#coverTx{font-size:15px;color:var(--dim);margin-top:6px;min-height:22px}
-#eq{display:flex;gap:4px;height:20px;align-items:flex-end}
+#ring{--p:0;width:124px;height:124px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--pink) calc(var(--p)*1turn),#2a1d36 0);box-shadow:0 0 20px rgba(255,47,174,.35)}
+#ring>div{width:104px;height:104px;border-radius:50%;background:#0d0712;display:grid;place-items:center;font-size:42px}
+#coverTx{font-size:14px;color:var(--tx2);min-height:21px}
+#eq{display:flex;gap:4px;height:18px;align-items:flex-end}
 #eq i{width:5px;background:var(--cyan);border-radius:3px;height:30%;box-shadow:0 0 6px var(--cyan)}
 #eq.go i{animation:eq .8s ease-in-out infinite alternate}
 #eq i:nth-child(2){animation-delay:-.3s}#eq i:nth-child(3){animation-delay:-.6s}#eq i:nth-child(4){animation-delay:-.15s}#eq i:nth-child(5){animation-delay:-.45s}
 @keyframes eq{to{height:100%}}
-#ask{display:flex;align-items:center;gap:10px;font-size:15px;color:#ddd}
-#ptNow{font-family:"Zen Maru Gothic";font-weight:900;font-size:15px;color:var(--core);border:2px solid var(--pinkL);border-radius:999px;padding:2px 12px;box-shadow:0 0 10px var(--pink)}
-#ptNow.x2{border-color:var(--amber);box-shadow:0 0 12px var(--amber);color:#fff4dc}
-#steps{display:flex;gap:6px}
-#steps i{width:26px;height:6px;border-radius:3px;background:#2a1d36}
-#steps i.on{background:var(--pink);box-shadow:0 0 6px var(--pink)}
-#steps i.done{background:#5a2a50}
+.pane{flex:1 0 auto;display:flex;flex-direction:column;gap:12px}
+#ask{display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;color:var(--tx2);margin-top:4px}
+#askTx{font-weight:700;color:#fff}
+#ptNow{display:none;font-family:"Zen Maru Gothic";font-weight:900;font-size:13px;color:#1a1000;background:var(--amber);border-radius:999px;padding:1px 10px;box-shadow:0 0 10px #ffc35a88}
+#ptNow.x2{display:inline-block}
 #hint{text-align:center;font-size:24px;min-height:36px;line-height:1.3}
-#hint small{display:block;font-family:"Noto Sans TC";font-weight:400;font-size:14px;color:var(--dim);text-shadow:none;letter-spacing:0;margin-top:2px}
+#hint small{display:block;font-family:"Noto Sans TC";font-weight:400;font-size:14px;color:var(--tx2);text-shadow:none;letter-spacing:0;margin-top:4px}
+#ask,#ans{margin-top:auto !important}
+.ctl{margin-top:auto;padding-top:8px;display:flex;flex-direction:column;gap:10px}
+.ctl .row button{height:48px;padding:0 8px;font-size:15px}
+#bBad{align-self:center}
 
-/* 公布 */
-#ans{width:100%;max-width:520px;text-align:center}
+/* ===== 公布 ===== */
+#ans{text-align:center;margin-top:4px}
 #ansAsk{color:var(--cyanL);font-size:13px;letter-spacing:.1em}
-#ansBig{font-size:34px;line-height:1.25;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+#ansBig{font-size:36px;line-height:1.25;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
 #ansMeta{color:#ddd;font-size:16px;margin-top:4px}
 #ansMeta .y{color:var(--amber);font-family:"DotGothic16"}
-#ansStyle{color:var(--cyanL);font-size:13px;margin-top:2px}
+#ansStyle{display:inline-block;color:var(--cyanL);font-size:12px;margin-top:6px;border:1px solid #1f4f60;border-radius:999px;padding:1px 10px}
 @keyframes pop{from{transform:scale(.6);opacity:0}}
-#bOrig{padding:8px 14px;font-size:14px}
-#who{width:100%;max-width:520px}
-#whoT{color:var(--cyanL);font-size:13px;letter-spacing:.1em;margin-bottom:8px;text-align:center}
+#bOrig{align-self:center;height:38px;padding:0 16px;font-size:14px;display:flex;align-items:center;gap:6px}
+#whoT{color:var(--tx2);font-size:13px;margin-bottom:8px;text-align:center}
 #whoT b{color:var(--amber);font-family:"DotGothic16";font-weight:400;font-size:15px}
-#chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
-.chip{padding:12px 8px;border-radius:14px;font-size:17px;display:flex;flex-direction:column;align-items:center;gap:2px}
+#chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.chip{height:62px;padding:0 6px;border-radius:14px;font-size:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:var(--tx2)}
+.chip>span:first-child{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .chip .sc{font-size:15px}
-.chip.on{border-color:var(--green);color:#fff;box-shadow:0 0 12px #00e676,inset 0 0 10px rgba(0,230,118,.35)}
+.chip.on{border-color:var(--green);color:#fff;background:#08201a;box-shadow:0 0 12px #00e67688,inset 0 0 10px rgba(0,230,118,.3)}
 .chip.on .sc::after{content:" +" attr(data-pt);color:var(--green)}
 
-/* 結束 */
-#endT{font-size:34px;margin-top:20px}
-#rank{width:100%;max-width:420px;display:flex;flex-direction:column;gap:10px}
-.rk{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:var(--glass);border:2px solid #2a1d36}
-.rk.w{border-color:var(--pinkL);box-shadow:0 0 14px var(--pink)}
-.rk .n{font-size:22px;width:28px}
-.rk .nm{flex:1;font-size:19px;font-weight:700}
+/* ===== 結束 ===== */
+#end{gap:14px}
+#endK{text-align:center;color:var(--cyanL);font-size:13px;letter-spacing:.3em;text-indent:.3em;margin-top:18px}
+#endT{font-size:40px;text-align:center;line-height:1.2;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+#crown{margin:0 auto -4px;color:var(--amber);filter:drop-shadow(0 0 8px #ffc35a99)}
+#rank{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.rk{position:relative;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;border-radius:14px;background:var(--glass);border:1.5px solid var(--line);overflow:hidden}
+.rk .bar{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#ff2fae22,#ff2fae08);border-right:1px solid #ff2fae44}
+.rk>*:not(.bar){position:relative}
+.rk.w{border-color:var(--pinkL);box-shadow:0 0 14px #ff2fae77}
+.rk .n{font-size:20px;width:22px;color:var(--tx3)}
+.rk.w .n{color:var(--amber)}
+.rk .nm{flex:1;font-size:18px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rk .s{font-size:24px}
-#endInfo{color:var(--dim);font-size:13px}
+#endInfo{color:var(--tx3);font-size:13px;text-align:center}
+#end .dockb{margin-top:auto}
 
-#toast{position:fixed;left:50%;bottom:calc(24px + var(--pb));transform:translateX(-50%);background:var(--glass);border:1px solid var(--cyan);padding:8px 16px;border-radius:10px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9;font-size:14px;white-space:nowrap}
-#toast.on{opacity:1}
-@media (prefers-reduced-motion:reduce){#eq.go i,#cardT,#ansBig{animation:none}}
+#toast{position:fixed;left:50%;top:calc(16px + var(--pt));transform:translate(-50%,-8px);background:#0d1a24;border:1px solid var(--cyan);color:#fff;padding:8px 16px;border-radius:12px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:9;font-size:14px;white-space:nowrap;box-shadow:0 6px 20px #000a}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){#eq.go i,#cardT,#ansBig,#endT{animation:none}#prog i,.ladder i{transition:none}}
 </style>
 </head>
 <body>
 
 <!-- 開場 -->
 <section class="scr on" id="setup">
-  <div id="title" class="neon">原曲是哪首？</div>
-  <div id="tagline">原曲、改編混著來，看誰耳朵最靈</div>
+  <div class="hero">
+    <div id="title" class="neon">原曲是哪首？</div>
+    <div id="tagline">原曲、改編混著來，看誰耳朵最靈</div>
+  </div>
 
-  <div class="lbl">玩家</div>
-  <div id="plist"></div>
-  <button id="addP">＋ 加一位</button>
+  <div class="sec">
+    <div class="lbl">玩家<small id="pcnt"></small></div>
+    <div id="plist"></div>
+    <button id="addP"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>加一位</button>
+  </div>
 
-  <div class="lbl">關卡（照順序進行，可以多選）</div>
-  <div id="modes"></div>
+  <div class="sec">
+    <div class="lbl">關卡<small>照順序進行，可以多選</small></div>
+    <div id="modes"></div>
+  </div>
 
-  <div class="lbl" style="display:flex;width:100%">題庫（可以多選）<a href="list.html" style="margin-left:auto;color:var(--pinkL);text-decoration:none">看題庫 ›</a></div>
-  <div class="pills" id="sets"></div>
+  <div class="sec">
+    <div class="lbl">題庫<small>可以多選</small><a href="list.html">看題庫<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></a></div>
+    <div class="pills" id="sets"></div>
+  </div>
 
-  <div class="lbl">題數</div>
-  <div class="pills" id="nq"></div>
+  <div class="sec">
+    <div class="lbl">題數</div>
+    <div id="nq"></div>
+  </div>
 
-  <button class="big main" id="start">開始</button>
   <div id="how"><b>玩法</b>　手機放桌上播歌，大家搶著喊答案，先喊先答，<b>答錯這題就不能再答</b>。越早猜到分數越高；<b>最後一題分數加倍</b>。有人答對就按「公布答案」，點答對的人加分。</div>
+
+  <div class="dockb">
+    <div id="sumTx"></div>
+    <button class="big main" id="start">開始</button>
+  </div>
 </section>
 
 <!-- 關卡卡片 -->
@@ -150,13 +203,14 @@ button:disabled{opacity:.4}
   <div id="cardNo"></div>
   <div id="cardT" class="neon"></div>
   <div id="cardD"></div>
-  <div id="cardPts"></div>
-  <button class="big main" id="bCard">開始這關</button>
+  <div id="cardPts" class="ladder"></div>
+  <div class="dockb"><button class="big main" id="bCard">開始這關</button></div>
 </section>
 
 <!-- 遊戲中（播放與公布共用，播放器 iframe 不搬動） -->
 <section class="scr" id="game">
   <div id="top"><span>第 <span class="num q" id="qn">1</span> / <span class="num" id="qt">10</span> 題</span><span id="modeTag"></span><button id="quit">結束</button></div>
+  <div id="prog"><i></i></div>
   <div id="stage">
     <div id="player"></div>
     <div id="cover">
@@ -165,33 +219,40 @@ button:disabled{opacity:.4}
       <div id="coverTx"></div>
     </div>
   </div>
-  <div id="pPlay" style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%">
-    <div id="ask"><span id="askTx"></span><span id="ptNow"></span><span id="steps"></span></div>
+  <div id="pPlay" class="pane">
+    <div id="ask"><span id="askTx"></span><span id="ptNow"></span></div>
+    <div id="steps" class="ladder"></div>
     <div id="hint" class="neonC"></div>
-    <button class="big main" id="bMain">播放</button>
-    <div class="row"><button class="sub" id="bStep"></button><button class="sub" id="bAgain">重聽這段</button></div>
-    <div class="row"><button id="bBad" style="color:var(--dim);border-color:#2a1d36">這首播不了，換一首</button></div>
+    <div class="ctl">
+      <div class="row"><button class="sub" id="bStep"></button><button class="sub" id="bAgain">重聽這段</button></div>
+      <button class="big main" id="bMain">播放</button>
+      <button class="ghost" id="bBad">這首播不了？換一首</button>
+    </div>
   </div>
-  <div id="pRev" style="display:none;flex-direction:column;align-items:center;gap:14px;width:100%">
+  <div id="pRev" class="pane" style="display:none">
     <div id="ans">
       <div id="ansAsk"></div>
       <div id="ansBig" class="neon"></div>
       <div id="ansMeta"></div>
       <div id="ansStyle"></div>
     </div>
-    <button class="sub" id="bOrig">聽原曲</button>
+    <button class="sub" id="bOrig"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>聽原曲對照</button>
     <div id="who"><div id="whoT"></div><div id="chips"></div></div>
-    <button class="big main" id="bNext">下一題</button>
+    <div class="ctl"><button class="big main" id="bNext">下一題</button></div>
   </div>
 </section>
 
 <!-- 結束 -->
 <section class="scr" id="end">
-  <div id="endT" class="neon">最終排名</div>
+  <div id="endK">最終排名</div>
+  <svg id="crown" width="44" height="34" viewBox="0 0 44 34" fill="currentColor"><path d="M4 28 1 7l11 8L22 1l10 14 11-8-3 21z"/><rect x="4" y="30" width="36" height="4" rx="1.5"/></svg>
+  <div id="endT" class="neon"></div>
   <div id="rank"></div>
   <div id="endInfo"></div>
-  <button class="big main" id="bReplay">再來一局</button>
-  <button class="big sub" id="bHome" style="font-size:18px">回到設定</button>
+  <div class="dockb">
+    <button class="big main" id="bReplay">再來一局</button>
+    <button class="ghost" id="bHome">回到設定</button>
+  </div>
 </section>
 
 <div id="toast"></div>
@@ -242,12 +303,17 @@ const startOf = v => v.start != null ? v.start : DEF_START;
 
 // ===== 開場 =====
 function paintSetup() {
-  $('plist').innerHTML = cfg.players.map((n, i) => `<div class="pl"><input value="${esc(n)}" data-i="${i}" maxlength="8" enterkeyhint="done"><button data-del="${i}" aria-label="移除">✕</button></div>`).join('');
-  $('modes').innerHTML = ORDER.map(k => { const m = MODES[k];
-    return `<button class="md${cfg.modes.includes(k) ? ' on' : ''}" data-md="${k}"><b>${m.n}</b><span>${m.d}</span></button>`; }).join('');
+  const X = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  $('plist').innerHTML = cfg.players.map((n, i) => `<div class="pl"><input value="${esc(n)}" data-i="${i}" maxlength="8" enterkeyhint="done" aria-label="玩家 ${i + 1} 名字"><button data-del="${i}" aria-label="移除 ${esc(n)}">${X}</button></div>`).join('');
+  $('pcnt').textContent = `${cfg.players.length} 位`;
+  const on = ORDER.filter(k => cfg.modes.includes(k));
+  $('modes').innerHTML = ORDER.map(k => { const m = MODES[k], n = on.indexOf(k);
+    return `<button class="md${n >= 0 ? ' on' : ''}" data-md="${k}" aria-pressed="${n >= 0}"><span class="ck">${n >= 0 ? n + 1 : ''}</span><span class="tx"><b>${m.n}</b><span class="d">${m.d}</span></span></button>`; }).join('');
   $('sets').innerHTML = SETS.map(s => { const c = setCount(s);
     return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : ''; }).join('');
   $('nq').innerHTML = [6, 10, 15, 20].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
+  const ok = on.filter(canMode);
+  $('sumTx').innerHTML = ok.length ? `<span class="num">${cfg.nq}</span> 題・<span class="num">${ok.length}</span> 關・<span class="num">${cfg.players.length}</span> 人` : '選一個關卡和題庫';
 }
 $('plist').addEventListener('input', e => { if (e.target.dataset.i != null) { cfg.players[+e.target.dataset.i] = e.target.value; save(); } });
 $('plist').addEventListener('click', e => {
@@ -334,7 +400,8 @@ function roundCard(k) {
   $('cardNo').textContent = `第 ${'一二三四'[mods.indexOf(k)]} 關`;
   $('cardT').textContent = m.n;
   $('cardD').textContent = m.d;
-  $('cardPts').innerHTML = m.pts.map(([n, p]) => `<span>${n}<b>${p}</b> 分</span>`).join('');
+  $('cardNo').textContent += `・共 ${mods.length} 關`;
+  $('cardPts').innerHTML = m.pts.map(([n, p]) => `<i>${n}<b>${p}</b></i>`).join('');
   $('cardT').style.animation = 'none'; void $('cardT').offsetWidth; $('cardT').style.animation = '';
   stopVid();
   show('card');
@@ -346,6 +413,7 @@ function question() {
   const q = G.qs[G.i];
   G.st = 'ready'; G.step = 0; G.got = new Set();
   $('qn').textContent = G.i + 1;
+  $('prog').firstChild.style.width = (G.i / G.qs.length * 100) + '%';
   $('modeTag').textContent = MODES[q.mode].n;
   phase('play');
   $('cover').classList.remove('off');
@@ -361,9 +429,10 @@ const ptOf = q => q.steps[G.step].pt * (q.x2 ? 2 : 1);
 function paintStep() {
   const q = G.qs[G.i], s = q.steps[G.step], nx = q.steps[G.step + 1];
   $('askTx').textContent = MODES[q.mode].ask;
-  $('ptNow').textContent = (q.x2 ? '雙倍 ' : '') + ptOf(q) + ' 分';
+  $('ptNow').textContent = '最後一題・雙倍';
   $('ptNow').classList.toggle('x2', !!q.x2);
-  $('steps').innerHTML = q.steps.map((_, i) => `<i class="${i === G.step ? 'on' : i < G.step ? 'done' : ''}"></i>`).join('');
+  const lab = st => q.mode === 'intro' ? st.len + ' 秒' : st.tag || (st.hint ? '＋提示' : st.v.orig ? '原曲' : '改編');
+  $('steps').innerHTML = q.steps.map((st, i) => `<i class="${i === G.step ? 'on' : i < G.step ? 'done' : ''}">${lab(st)}<b>${st.pt * (q.x2 ? 2 : 1)}</b></i>`).join('');
   $('sec').textContent = s.len;
   $('ring').style.setProperty('--p', 0);
   $('bStep').textContent = nx ? `${q.mode === 'intro' ? '再放 ' + nx.len + ' 秒' : nx.tag ? '換聽原曲' : '給提示'}・${nx.pt * (q.x2 ? 2 : 1)} 分` : '';
@@ -440,15 +509,18 @@ function reveal() {
   // 正在播改編、又有原曲 → 可以接著聽原曲對照
   const o = q.orig;
   $('bOrig').style.display = o && !playing.v.orig ? '' : 'none';
+  $('prog').firstChild.style.width = ((G.i + 1) / G.qs.length * 100) + '%';
   $('whoT').innerHTML = `誰答對了？答對 <b>+${G.pt}</b> 分（可以點多位）`;
   paintChips();
-  $('bNext').textContent = G.i + 1 >= G.qs.length ? '看排名' : '下一題';
 }
 $('bOrig').onclick = () => { const o = G.qs[G.i].orig; if (!o) return;
   player.loadVideoById({videoId: o.yt, startSeconds: startOf(o)}); loaded = o.yt;
   $('ansStyle').textContent = '原曲'; $('bOrig').style.display = 'none'; };
 function paintChips() {
-  $('chips').innerHTML = cfg.players.map((n, i) => `<button class="chip${G.got.has(i) ? ' on' : ''}" data-p="${i}"><span>${esc(n)}</span><span class="num sc" data-pt="${G.pt}">${G.score[i]}</span></button>`).join('');
+  $('chips').innerHTML = cfg.players.map((n, i) => `<button class="chip${G.got.has(i) ? ' on' : ''}" data-p="${i}" aria-pressed="${G.got.has(i)}"><span>${esc(n)}</span><span class="num sc" data-pt="${G.pt}">${G.score[i]}</span></button>`).join('');
+  const last = G.i + 1 >= G.qs.length;
+  $('bNext').textContent = G.got.size ? (last ? '看排名' : '下一題') : (last ? '沒人答對・看排名' : '沒人答對・下一題');
+  $('bNext').style.fontSize = G.got.size ? '' : '19px';
 }
 $('chips').onclick = e => {
   const b = e.target.closest('.chip'); if (!b) return;
@@ -472,7 +544,11 @@ function finish() {
   const ord = cfg.players.map((n, i) => ({n, s: G.score[i]})).sort((a, b) => b.s - a.s);
   const top = ord[0].s; let rk = 0, last = null;
   $('rank').innerHTML = ord.map((p, k) => { if (p.s !== last) { rk = k + 1; last = p.s; }
-    return `<div class="rk${p.s === top && top > 0 ? ' w' : ''}"><span class="num n">${rk}</span><span class="nm">${esc(p.n)}</span><span class="num s">${p.s}</span></div>`; }).join('');
+    return `<div class="rk${p.s === top && top > 0 ? ' w' : ''}"><span class="bar" style="width:${top > 0 ? Math.round(p.s / top * 100) : 0}%"></span><span class="num n">${rk}</span><span class="nm">${esc(p.n)}</span><span class="num s">${p.s}</span></div>`; }).join('');
+  const champs = ord.filter(p => p.s === top);
+  $('endT').textContent = top <= 0 ? '大家都沒得分' : champs.length > 1 ? `${champs.length} 人並列第一` : champs[0].n;
+  $('crown').style.display = top > 0 ? '' : 'none';
+  $('endT').style.animation = 'none'; void $('endT').offsetWidth; $('endT').style.animation = '';
   $('endInfo').textContent = `共 ${G.qs.length} 題・${[...new Set(G.qs.map(q => MODES[q.mode].n))].join('、')}`;
   releaseAwake();
   show('end');
