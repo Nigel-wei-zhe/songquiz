@@ -73,7 +73,7 @@ button:active{transform:scale(.97)}
   <div id="row2"><button id="ok" style="border-color:#1e6a46;color:var(--green)">對，沒問題</button><button id="skip">剔除這首</button><button id="clr">清掉這首的標記</button></div>
   <button id="copy">複製結果（已標 <span id="cnt">0</span> 首）</button>
   <textarea id="out" readonly></textarea>
-  <div id="help">青色＝自動估算的秒數，先按「試」聽聽看，對就不用動，不對再播到正確位置重按（變綠色）。播到位置後按上面的標記鈕，就記下目前的秒數；再按一次會改成新的秒數。標完一首直接按 › 換下一首。進度存在這支手機的瀏覽器裡，關掉再開還在。全部標完（或標一部分也行）按「複製結果」，貼給 Claude。</div>
+  <div id="help">播到位置後按上面的標記鈕，就記下目前的秒數；再按一次會改成新的秒數。標完一首直接按 › 換下一首。進度存在這支手機的瀏覽器裡，關掉再開還在。全部標完（或標一部分也行）按「複製結果」，貼給 Claude。</div>
 </div>
 <div id="toast"></div>
 <script>
@@ -162,8 +162,8 @@ window.onYouTubeIframeAPIReady = () => {
 Promise.all([fetch('data/orig.json').then(r => r.json()), fetch('data/songs.json').then(r => r.json())])
   .then(([o, c]) => { data.o = o.filter(x => !x.skip); data.c = c.filter(x => !x.skip);
     // 待處理：沒有自動副歌的原曲排前面，再來是估算的（抽聽）
-    data.t = [...data.o.filter(x => x.start == null).map(x => Object.assign(x, {why: '要標副歌'})),
-              ...data.o.filter(x => x.auto === 'lrclib-mv').map(x => Object.assign(x, {why: '估算・抽聽'}))];
+    // 估算的那批使用者抽聽十首都沒問題（2026-11-24），待處理只留沒有副歌的
+    data.t = data.o.filter(x => x.start == null).map(x => Object.assign(x, {why: '要標副歌'}));
     // 從第一首還沒標的開始
     for (const k of ['t', 'o', 'c']) { const i = data[k].findIndex(x => !hasMark(x)); idx[k] = i < 0 ? 0 : i; }
     paint(); load(); });
