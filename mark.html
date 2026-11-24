@@ -58,7 +58,7 @@ button:active{transform:scale(.97)}
 </head>
 <body>
 <div class="wrap">
-  <div id="tabs"><button data-k="o" class="on">原曲</button><button data-k="c">改編</button><span id="prog"></span></div>
+  <div id="tabs"><button data-k="t" class="on">待處理</button><button data-k="o">原曲</button><button data-k="c">改編</button><span id="prog"></span></div>
   <div id="jump"></div>
   <div id="pw"><div id="player"></div></div>
   <div id="nav"><button id="prev">‹</button><div id="ttl"><div id="song"></div><div id="meta"></div></div><button id="next">›</button></div>
@@ -70,7 +70,7 @@ button:active{transform:scale(.97)}
   <div id="time2" style="display:flex;justify-content:center"><button id="play" style="width:64px">▶</button></div>
   <div class="marks" id="marks"></div>
   <div class="tests" id="tests"></div>
-  <div id="row2"><button id="skip">剔除這首</button><button id="clr">清掉這首的標記</button></div>
+  <div id="row2"><button id="ok" style="border-color:#1e6a46;color:var(--green)">對，沒問題</button><button id="skip">剔除這首</button><button id="clr">清掉這首的標記</button></div>
   <button id="copy">複製結果（已標 <span id="cnt">0</span> 首）</button>
   <textarea id="out" readonly></textarea>
   <div id="help">青色＝自動估算的秒數，先按「試」聽聽看，對就不用動，不對再播到正確位置重按（變綠色）。播到位置後按上面的標記鈕，就記下目前的秒數；再按一次會改成新的秒數。標完一首直接按 › 換下一首。進度存在這支手機的瀏覽器裡，關掉再開還在。全部標完（或標一部分也行）按「複製結果」，貼給 Claude。</div>
@@ -79,11 +79,11 @@ button:active{transform:scale(.97)}
 <script>
 {
 const MK = {
-  o: [{k:'intro', n:'前奏起點', d:'前奏秒殺從這開始'}, {k:'start', n:'副歌起點', d:'其他關卡從這播'}, {k:'stop', n:'停點', d:'接下一句停在這'}],
+  o: [{k:'intro', n:'前奏起點', d:'第一個音出來的地方'}, {k:'start', n:'副歌起點', d:'副歌第一句'}],
   c: [{k:'start', n:'副歌起點', d:'從這開始播'}],
 };
 const LSK = 'sqMarks';
-let data = {o: [], c: []}, tab = 'o', idx = {o: 0, c: 0}, player = null, ready = false, stopT = null;
+let data = {t: [], o: [], c: []}, tab = 't', idx = {t: 0, o: 0, c: 0}, player = null, ready = false, stopT = null;
 let M = {}; try { M = JSON.parse(localStorage.getItem(LSK) || '{}'); } catch (e) {}
 const $ = id => document.getElementById(id);
 const fmt = s => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
@@ -91,6 +91,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const toast = t => { const m = $('toast'); m.textContent = t; m.classList.add('on'); clearTimeout(m._t); m._t = setTimeout(() => m.classList.remove('on'), 1600); };
 const persist = () => { try { localStorage.setItem(LSK, JSON.stringify(M)); } catch (e) {} };
 const cur = () => data[tab][idx[tab]];
+const kind = () => tab === 'c' ? 'c' : 'o';
 const mk = x => M[x.yt] || {};
 // 題庫裡已有的秒數（自動估算）當預設，手動標的蓋過去
 const pre = x => { const o = {}; for (const k of ['intro', 'start', 'stop']) if (x[k] != null) o[k] = x[k]; return o; };
@@ -102,17 +103,19 @@ function paint() {
   const x = cur(); if (!x) return;
   const m = val(x), own = mk(x), list = data[tab];
   $('song').textContent = x.song;
-  $('meta').textContent = `${idx[tab] + 1}/${list.length}・${x.artist}${tab === 'c' ? '・' + (x.set || x.channel) : ''}`;
-  $('marks').style.gridTemplateColumns = `repeat(${MK[tab].length},minmax(0,1fr))`;
-  $('marks').innerHTML = MK[tab].map(d => `<button class="mk${own[d.k] != null ? ' set' : m[d.k] != null ? ' auto' : ''}" data-mk="${d.k}"><b>${d.n}</b><span class="num v">${m[d.k] != null ? fmt(m[d.k]) : ''}</span><small>${d.d}</small></button>`).join('');
-  const T = tab === 'o'
-    ? [['試前奏 1 秒', 'intro'], ['試副歌', 'start'], ['試停點', 'stop']]
+  $('meta').textContent = `${idx[tab] + 1}/${list.length}・${x.artist}${tab === 'c' ? '・' + (x.set || x.channel) : ''}${tab === 't' ? '・' + (x.why || '') : ''}`;
+  $('marks').style.gridTemplateColumns = `repeat(${MK[kind()].length},minmax(0,1fr))`;
+  $('marks').innerHTML = MK[kind()].map(d => `<button class="mk${own[d.k] != null ? ' set' : m[d.k] != null ? ' auto' : ''}" data-mk="${d.k}"><b>${d.n}</b><span class="num v">${m[d.k] != null ? fmt(m[d.k]) : ''}</span><small>${d.d}</small></button>`).join('');
+  const T = kind() === 'o'
+    ? [['試前奏 1 秒', 'intro'], ['試副歌', 'start']]
     : [['試副歌', 'start']];
   $('tests').style.gridTemplateColumns = `repeat(${T.length},minmax(0,1fr))`;
   $('tests').innerHTML = T.map(([n, k]) => `<button data-t="${k}"${m[k] == null && k !== 'intro' ? ' disabled' : ''}>${n}</button>`).join('');
+  $('ok').style.display = x.auto ? '' : 'none';
+  $('ok').textContent = own.ok ? '已確認 ✓' : '對，沒問題';
   $('skip').classList.toggle('on', !!own.skip);
   $('skip').textContent = own.skip ? '已剔除（按一下恢復）' : '剔除這首';
-  const done = data.o.filter(hasMark).length + data.c.filter(hasMark).length;
+  const done = data.o.filter(hasMark).length + data.c.filter(hasMark).length; // 待處理是原曲的子集，不重複算
   $('cnt').textContent = done;
   $('prog').textContent = `已標 ${list.filter(hasMark).length}/${list.length}`;
   $('jump').innerHTML = list.map((y, i) => `<button data-j="${i}" class="${hasMark(y) ? 'done' : ''}${i === idx[tab] ? ' cur' : ''}">${esc(y.song)}</button>`).join('');
@@ -138,15 +141,16 @@ $('marks').onclick = e => { const b = e.target.closest('[data-mk]'); if (!b || !
 $('tests').onclick = e => { const k = e.target.dataset.t; if (!k || !ready) return; const m = val(cur());
   if (k === 'intro') playRange(m.intro ?? 0, 1);
   else if (k === 'start') playRange(m.start, 10);
-  else playRange(m.stop - 8, 8); };
+  };
+$('ok').onclick = () => { const x = cur(); M[x.yt] = Object.assign(mk(x), {ok: 1}); persist(); paint(); go(1); };
 $('skip').onclick = () => { const x = cur(), m = mk(x); m.skip ? delete m.skip : m.skip = 1; M[x.yt] = m; if (!Object.keys(m).length) delete M[x.yt]; persist(); paint(); };
 $('clr').onclick = () => { delete M[cur().yt]; persist(); paint(); toast('已清掉'); };
 $('copy').onclick = async () => {
   // 只輸出秒數與剔除，沒有歌詞
-  const line = (x, t) => { const m = mk(x); return [t, x.yt, x.song, m.intro ?? '', m.start ?? '', m.stop ?? '', m.skip ? '剔除' : ''].join('\t'); };
+  const line = (x, t) => { const m = mk(x); return [t, x.yt, x.song, m.intro ?? '', m.start ?? '', m.skip ? '剔除' : m.ok ? '確認' : ''].join('\t'); };
   const rows = [...data.o.filter(hasMark).map(x => line(x, '原曲')), ...data.c.filter(hasMark).map(x => line(x, '改編'))];
   if (!rows.length) return toast('還沒標任何一首');
-  const txt = '#songquiz-marks v1\n類型\tyt\t歌名\t前奏\t副歌\t停點\t剔除\n' + rows.join('\n');
+  const txt = '#songquiz-marks v1\n類型\tyt\t歌名\t前奏\t副歌\t狀態\n' + rows.join('\n');
   try { await navigator.clipboard.writeText(txt); toast(`已複製 ${rows.length} 首，貼給 Claude 就好`); }
   catch (e) { $('out').style.display = 'block'; $('out').value = txt; $('out').select(); toast('請長按下面的文字全選複製'); }
 };
@@ -157,8 +161,11 @@ window.onYouTubeIframeAPIReady = () => {
 };
 Promise.all([fetch('data/orig.json').then(r => r.json()), fetch('data/songs.json').then(r => r.json())])
   .then(([o, c]) => { data.o = o.filter(x => !x.skip); data.c = c.filter(x => !x.skip);
+    // 待處理：沒有自動副歌的原曲排前面，再來是估算的（抽聽）
+    data.t = [...data.o.filter(x => x.start == null).map(x => Object.assign(x, {why: '要標副歌'})),
+              ...data.o.filter(x => x.auto === 'lrclib-mv').map(x => Object.assign(x, {why: '估算・抽聽'}))];
     // 從第一首還沒標的開始
-    for (const k of ['o', 'c']) { const i = data[k].findIndex(x => !hasMark(x)); idx[k] = i < 0 ? 0 : i; }
+    for (const k of ['t', 'o', 'c']) { const i = data[k].findIndex(x => !hasMark(x)); idx[k] = i < 0 ? 0 : i; }
     paint(); load(); });
 }
 </script>
