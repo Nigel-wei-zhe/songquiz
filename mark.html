@@ -35,6 +35,7 @@ button:active{transform:scale(.97)}
 .mk b{font-size:15px}
 .mk .v{font-size:18px;min-height:24px}
 .mk.set{border-color:var(--green);box-shadow:0 0 8px #00e676}
+.mk.auto{border-color:#2f5a6a}.mk.auto .v{color:var(--cyanL)}.mk.auto small::before{content:'自動・';color:var(--cyanL)}
 .mk small{font-size:11px;color:var(--dim)}
 .tests{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .tests button{font-size:13px;color:var(--cyanL);border-color:#2f5a6a;padding:8px 4px}
@@ -72,7 +73,7 @@ button:active{transform:scale(.97)}
   <div id="row2"><button id="skip">剔除這首</button><button id="clr">清掉這首的標記</button></div>
   <button id="copy">複製結果（已標 <span id="cnt">0</span> 首）</button>
   <textarea id="out" readonly></textarea>
-  <div id="help">播到位置後按上面的標記鈕，就記下目前的秒數；再按一次會改成新的秒數。標完一首直接按 › 換下一首。進度存在這支手機的瀏覽器裡，關掉再開還在。全部標完（或標一部分也行）按「複製結果」，貼給 Claude。</div>
+  <div id="help">青色＝自動估算的秒數，先按「試」聽聽看，對就不用動，不對再播到正確位置重按（變綠色）。播到位置後按上面的標記鈕，就記下目前的秒數；再按一次會改成新的秒數。標完一首直接按 › 換下一首。進度存在這支手機的瀏覽器裡，關掉再開還在。全部標完（或標一部分也行）按「複製結果」，貼給 Claude。</div>
 </div>
 <div id="toast"></div>
 <script>
@@ -91,23 +92,26 @@ const toast = t => { const m = $('toast'); m.textContent = t; m.classList.add('o
 const persist = () => { try { localStorage.setItem(LSK, JSON.stringify(M)); } catch (e) {} };
 const cur = () => data[tab][idx[tab]];
 const mk = x => M[x.yt] || {};
+// 題庫裡已有的秒數（自動估算）當預設，手動標的蓋過去
+const pre = x => { const o = {}; for (const k of ['intro', 'start', 'stop']) if (x[k] != null) o[k] = x[k]; return o; };
+const val = x => Object.assign(pre(x), mk(x));
 const hasMark = x => Object.keys(mk(x)).length > 0;
 const now = () => ready && player.getCurrentTime ? player.getCurrentTime() : 0;
 
 function paint() {
   const x = cur(); if (!x) return;
-  const m = mk(x), list = data[tab];
+  const m = val(x), own = mk(x), list = data[tab];
   $('song').textContent = x.song;
   $('meta').textContent = `${idx[tab] + 1}/${list.length}・${x.artist}${tab === 'c' ? '・' + (x.set || x.channel) : ''}`;
   $('marks').style.gridTemplateColumns = `repeat(${MK[tab].length},minmax(0,1fr))`;
-  $('marks').innerHTML = MK[tab].map(d => `<button class="mk${m[d.k] != null ? ' set' : ''}" data-mk="${d.k}"><b>${d.n}</b><span class="num v">${m[d.k] != null ? fmt(m[d.k]) : ''}</span><small>${d.d}</small></button>`).join('');
+  $('marks').innerHTML = MK[tab].map(d => `<button class="mk${own[d.k] != null ? ' set' : m[d.k] != null ? ' auto' : ''}" data-mk="${d.k}"><b>${d.n}</b><span class="num v">${m[d.k] != null ? fmt(m[d.k]) : ''}</span><small>${d.d}</small></button>`).join('');
   const T = tab === 'o'
     ? [['試前奏 1 秒', 'intro'], ['試副歌', 'start'], ['試停點', 'stop']]
     : [['試副歌', 'start']];
   $('tests').style.gridTemplateColumns = `repeat(${T.length},minmax(0,1fr))`;
   $('tests').innerHTML = T.map(([n, k]) => `<button data-t="${k}"${m[k] == null && k !== 'intro' ? ' disabled' : ''}>${n}</button>`).join('');
-  $('skip').classList.toggle('on', !!m.skip);
-  $('skip').textContent = m.skip ? '已剔除（按一下恢復）' : '剔除這首';
+  $('skip').classList.toggle('on', !!own.skip);
+  $('skip').textContent = own.skip ? '已剔除（按一下恢復）' : '剔除這首';
   const done = data.o.filter(hasMark).length + data.c.filter(hasMark).length;
   $('cnt').textContent = done;
   $('prog').textContent = `已標 ${list.filter(hasMark).length}/${list.length}`;
@@ -117,8 +121,7 @@ function paint() {
 function load() {
   const x = cur(); if (!x || !ready) return;
   clearTimeout(stopT);
-  const m = mk(x);
-  player.cueVideoById({videoId: x.yt, startSeconds: m.start ?? 0});
+  player.cueVideoById({videoId: x.yt, startSeconds: val(x).start ?? 0});
 }
 function go(d) { const n = idx[tab] + d; if (n < 0 || n >= data[tab].length) return; idx[tab] = n; paint(); load(); }
 function playRange(a, len) { clearTimeout(stopT); player.seekTo(Math.max(0, a), true); player.playVideo(); if (len) stopT = setTimeout(() => player.pauseVideo(), len * 1000); }
@@ -132,7 +135,7 @@ $('play').onclick = () => { if (!ready) return; clearTimeout(stopT); player.getP
 $('marks').onclick = e => { const b = e.target.closest('[data-mk]'); if (!b || !ready) return;
   const x = cur(); M[x.yt] = Object.assign(mk(x), {[b.dataset.mk]: Math.round(now() * 10) / 10}); persist(); paint();
   toast(`${b.querySelector('b').textContent}：${fmt(now())}`); };
-$('tests').onclick = e => { const k = e.target.dataset.t; if (!k || !ready) return; const m = mk(cur());
+$('tests').onclick = e => { const k = e.target.dataset.t; if (!k || !ready) return; const m = val(cur());
   if (k === 'intro') playRange(m.intro ?? 0, 1);
   else if (k === 'start') playRange(m.start, 10);
   else playRange(m.stop - 8, 8); };

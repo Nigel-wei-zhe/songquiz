@@ -8,12 +8,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 68.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 72.4,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "ocTdA8NytIc",
@@ -24,12 +27,15 @@
   "artist": "F4",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 87.3,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 99.2,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "0-4mm0e2h44",
@@ -56,12 +62,15 @@
   "artist": "楊丞琳",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 61.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 65.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "1II_6o7uv1g",
@@ -88,17 +97,20 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 49.5,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 52.5,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "7LBUcOVmD6A",
-  "url": "https://www.youtube.com/watch?v=7LBUcOVmD6A",
-  "channel": "Gariber",
+  "yt": "VvcCNeG54Lo",
+  "url": "https://www.youtube.com/watch?v=VvcCNeG54Lo",
+  "channel": "Release - Topic",
   "title": "李榮浩 - 模特 Music Video",
   "song": "模特",
   "artist": "李榮浩",
@@ -109,7 +121,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "7LBUcOVmD6A",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "qzwsQTY-99o",
@@ -120,28 +135,36 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 75.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 80.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "OC6k-fm09CQ",
-  "url": "https://www.youtube.com/watch?v=OC6k-fm09CQ",
-  "channel": "華研國際",
+  "yt": "6W1zL-TzPCU",
+  "url": "https://www.youtube.com/watch?v=6W1zL-TzPCU",
+  "channel": "阿桑 - Topic",
   "title": "阿桑 [ 一直很安靜 ] Official Music Video",
   "song": "一直很安靜",
   "artist": "阿桑",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 62.1,
   "lang": "國語",
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "OC6k-fm09CQ",
+  "intro": 0,
+  "audio": true,
+  "stop": 66.3,
+  "auto": "lrclib"
  },
  {
   "yt": "bkPoZY4unU8",
@@ -168,12 +191,15 @@
   "artist": "王力宏",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 99.3,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 107.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "Z8Mqw0b9ADs",
@@ -184,12 +210,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 56.2,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 61.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "n_KlMpP0vdw",
@@ -200,12 +229,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 23.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 28.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "NShtKXer-Hc",
@@ -216,12 +248,15 @@
   "artist": "羅志祥",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 86.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 4s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 94.5,
+  "intro": 4,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "azOIvILpIW8",
@@ -232,12 +267,15 @@
   "artist": "李聖傑",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 54.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 58.8,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "Y4xCVlyCvX4",
@@ -248,12 +286,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 66.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 71.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "mebzXfWi87E",
@@ -288,20 +329,25 @@
   "orig": true
  },
  {
-  "yt": "bX33UI9ZPLk",
-  "url": "https://www.youtube.com/watch?v=bX33UI9ZPLk",
-  "channel": "周杰倫 Jay Chou",
+  "yt": "LE6eJGThhcI",
+  "url": "https://www.youtube.com/watch?v=LE6eJGThhcI",
+  "channel": "费星 - Topic",
   "title": "周杰倫 Jay Chou【黑色毛衣 Black Sweater】-Official Music Video",
   "song": "黑色毛衣",
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 60.7,
   "lang": "國語",
   "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "bX33UI9ZPLk",
+  "intro": 0,
+  "audio": true,
+  "stop": 70.2,
+  "auto": "lrclib"
  },
  {
   "yt": "znoweoouEvg",
@@ -344,12 +390,15 @@
   "artist": "李聖傑",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 50.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 55.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "9q7JOQfcJQM",
@@ -360,12 +409,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 160.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 163.5,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "rK1G8_E8Lb0",
@@ -392,12 +444,15 @@
   "artist": "王力宏",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 27.3,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 32.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "a7ziV-RjqBo",
@@ -456,12 +511,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 75.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 78.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "2zxc27bvrO8",
@@ -472,12 +530,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 85.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 93.2,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "ZcShYmOhHM0",
@@ -504,12 +565,15 @@
   "artist": "陳勢安",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 37.6,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 43.9,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "wt0RKW3aC84",
@@ -520,12 +584,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 53.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 57.6,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "HK7SPnGSxLM",
@@ -544,9 +611,9 @@
   "orig": true
  },
  {
-  "yt": "XLuzj141rTI",
-  "url": "https://www.youtube.com/watch?v=XLuzj141rTI",
-  "channel": "愛貝克思 avex taiwan",
+  "yt": "RA8hl6CjODE",
+  "url": "https://www.youtube.com/watch?v=RA8hl6CjODE",
+  "channel": "Release - Topic",
   "title": "[avex官方]羅志祥 自我催眠 (MV完整版)",
   "song": "自我催眠",
   "artist": "羅志祥",
@@ -557,7 +624,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "XLuzj141rTI",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "qct0JLjaHDc",
@@ -568,12 +638,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 69.3,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 76.4,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "VitJnr3IySc",
@@ -584,12 +657,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 84.7,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 94.0,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "duZDsG3tvoA",
@@ -600,12 +676,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 74.7,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 79.9,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "eZYmILwzHqQ",
@@ -616,12 +695,15 @@
   "artist": "陳奕迅",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 79.4,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 82.6,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "6Q0Pd53mojY",
@@ -632,12 +714,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 68.8,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 72.0,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "h1tNw1aFzSM",
@@ -648,17 +733,20 @@
   "artist": "莫文蔚",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 44.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 50.4,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "tpkLYxt7kRs",
-  "url": "https://www.youtube.com/watch?v=tpkLYxt7kRs",
-  "channel": "Timeless Music",
+  "yt": "x3bvKt8ICA4",
+  "url": "https://www.youtube.com/watch?v=x3bvKt8ICA4",
+  "channel": "王相如 - Topic",
   "title": "鄭中基 Ronald Cheng -《甲乙丙丁》Official Lyric Video",
   "song": "甲乙丙丁",
   "artist": "鄭中基",
@@ -669,7 +757,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "tpkLYxt7kRs",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "DYptgVvkVLQ",
@@ -680,12 +771,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 84.2,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 90.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "N2DkKFxijv0",
@@ -696,12 +790,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 62.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 66.2,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "ChXiROKng30",
@@ -712,17 +809,20 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 101.5,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 4s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 105.5,
+  "intro": 4.0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "u650A5w7Ka0",
-  "url": "https://www.youtube.com/watch?v=u650A5w7Ka0",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "NmR4DJIYGDU",
+  "url": "https://www.youtube.com/watch?v=NmR4DJIYGDU",
+  "channel": "Alex To - Topic",
   "title": "杜德偉 Alex To【無心傷害 I never meant to hurt you】Official Music Video",
   "song": "無心傷害",
   "artist": "杜德偉",
@@ -733,7 +833,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "u650A5w7Ka0",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "Bbp9ZaJD_eA",
@@ -744,12 +847,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 80.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 87.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "gqzlB7Gla2E",
@@ -760,12 +866,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 45.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 48.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "PhkePVphd7s",
@@ -776,12 +885,15 @@
   "artist": "陳奕迅",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 75.9,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 84.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "q5HHakJnSic",
@@ -792,12 +904,15 @@
   "artist": "林俊傑",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 80.3,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 86.6,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "xVTI5eSzwzQ",
@@ -808,12 +923,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 69.7,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 74.0,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "sHD_z90ZKV0",
@@ -824,17 +942,20 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 53.8,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 57.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "VJWQSEF6K08",
-  "url": "https://www.youtube.com/watch?v=VJWQSEF6K08",
-  "channel": "太合音樂 Taihe Music-精選",
+  "yt": "26V2XvdbM4c",
+  "url": "https://www.youtube.com/watch?v=26V2XvdbM4c",
+  "channel": "邹沛沛 - Topic",
   "title": "林俊傑 JJ Lin【凍結 Freeze】官方完整版 MV",
   "song": "凍結",
   "artist": "林俊傑",
@@ -845,7 +966,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "VJWQSEF6K08",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "BRcudpJzy1I",
@@ -856,12 +980,15 @@
   "artist": "A-Lin",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 65.5,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 69.5,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "zqKoXPHhmsM",
@@ -872,17 +999,20 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 40.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 46.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "8e_bQvjnqcw",
-  "url": "https://www.youtube.com/watch?v=8e_bQvjnqcw",
-  "channel": "吉川春袋",
+  "yt": "lp39qUPGTEY",
+  "url": "https://www.youtube.com/watch?v=lp39qUPGTEY",
+  "channel": "良少 - Topic",
   "title": "LO-key《仙女座事故》 (Unofficial MV)",
   "song": "仙女座事故",
   "artist": "LO-key",
@@ -893,7 +1023,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "8e_bQvjnqcw",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "v489sYYjtHI",
@@ -904,12 +1037,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 89.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 94.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "5XK2C9w6oVk",
@@ -920,17 +1056,20 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 77.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 80.6,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "yCXr1f6ocRY",
-  "url": "https://www.youtube.com/watch?v=yCXr1f6ocRY",
-  "channel": "NA",
+  "yt": "T6dk4iygUIw",
+  "url": "https://www.youtube.com/watch?v=T6dk4iygUIw",
+  "channel": "Keung To - Topic",
   "title": "陳奕迅 - 今天只做一件事",
   "song": "今天只做一件事",
   "artist": "陳奕迅",
@@ -941,12 +1080,15 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "yCXr1f6ocRY",
+  "intro": 0,
+  "audio": true
  },
  {
-  "yt": "_OP1roi1_Fs",
-  "url": "https://www.youtube.com/watch?v=_OP1roi1_Fs",
-  "channel": "王力宏 Wang Leehom",
+  "yt": "FqPdgyoEe4M",
+  "url": "https://www.youtube.com/watch?v=FqPdgyoEe4M",
+  "channel": "Release - Topic",
   "title": "王力宏 Leehom Wang - 你不在",
   "song": "你不在",
   "artist": "王力宏",
@@ -957,7 +1099,10 @@
   "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "_OP1roi1_Fs",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "CcfnZOJpbM4",
@@ -968,12 +1113,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 53.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 58.0,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "s9wvjSkR_Ms",
@@ -984,12 +1132,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 24.7,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 30.7,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "iSkRGgYSQfY",
@@ -1016,17 +1167,20 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 56.9,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 60.9,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "wRT-5heURhY",
-  "url": "https://www.youtube.com/watch?v=wRT-5heURhY",
-  "channel": "周杰倫 Jay Chou",
+  "yt": "DN58i3cHOcw",
+  "url": "https://www.youtube.com/watch?v=DN58i3cHOcw",
+  "channel": "Release - Topic",
   "title": "周杰倫 Jay Chou【黑色幽默 Dark Humor】-Official Music Video",
   "song": "黑色幽默",
   "artist": "周杰倫",
@@ -1037,7 +1191,10 @@
   "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "wRT-5heURhY",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "iKUwMUjavP4",
@@ -1064,12 +1221,15 @@
   "artist": "王力宏",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 65.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 74.0,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "H5VQdhYh9rc",
@@ -1096,12 +1256,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 75.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 81.8,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "fuM1aVCGR8c",
@@ -1112,12 +1275,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 85.5,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 89.6,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "aaM7qG2ycjk",
@@ -1128,12 +1294,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 73.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 78.2,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "m0z1XfphYzU",
@@ -1144,12 +1313,15 @@
   "artist": "林俊傑",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 59.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 2s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 64.2,
+  "intro": 2,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "H7hpK6cm-6k",
@@ -1160,12 +1332,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 83.2,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 87.7,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "VDzkjosrJO4",
@@ -1176,12 +1351,15 @@
   "artist": "黃小琥",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 106.3,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 111.1,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "RPWDeLqsN0g",
@@ -1192,12 +1370,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 93.8,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 97.2,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "WxZvXPTBC0A",
@@ -1208,12 +1389,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 44.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 51.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "-u4sPnpaFEA",
@@ -1224,12 +1408,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 78.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 88.0,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "K9CbHZLXPIA",
@@ -1256,12 +1443,15 @@
   "artist": "陶喆",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 73.7,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 109.6,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "YJfHuATJYsQ",
@@ -1304,12 +1494,15 @@
   "artist": "優客李林",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 80.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 8s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 88.0,
+  "intro": 8.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "KKsioz-zaZY",
@@ -1320,12 +1513,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 61.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 68.6,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "tLGgJLDk5kM",
@@ -1336,17 +1532,20 @@
   "artist": "李玖哲",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 35.0,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 37.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "3L3Me4JXVqE",
-  "url": "https://www.youtube.com/watch?v=3L3Me4JXVqE",
-  "channel": "Timeless Music",
+  "yt": "grMMF1A51gg",
+  "url": "https://www.youtube.com/watch?v=grMMF1A51gg",
+  "channel": "PIggy - Topic",
   "title": "陶喆 David Tao – 普通朋友 Regular Friends (官方完整版MV)",
   "song": "普通朋友",
   "artist": "陶喆",
@@ -1357,7 +1556,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "3L3Me4JXVqE",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "ZeghG09iaNY",
@@ -1368,12 +1570,15 @@
   "artist": "陳小春",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 118.6,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 125.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "MKNrnSsIwf8",
@@ -1392,9 +1597,9 @@
   "orig": true
  },
  {
-  "yt": "sTNJsIcPSvE",
-  "url": "https://www.youtube.com/watch?v=sTNJsIcPSvE",
-  "channel": "周杰倫 Jay Chou",
+  "yt": "FwPyDArYJ6A",
+  "url": "https://www.youtube.com/watch?v=FwPyDArYJ6A",
+  "channel": "小玉荣子 - Topic",
   "title": "周杰倫 Jay Chou【星晴 Starry Mood】-Official Music Video",
   "song": "星晴",
   "artist": "周杰倫",
@@ -1405,7 +1610,10 @@
   "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "sTNJsIcPSvE",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "cB7DIIG0ykk",
@@ -1416,12 +1624,15 @@
   "artist": "蔡依林",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 72.8,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 77.3,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "mLFhTFiX0uM",
@@ -1432,12 +1643,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 70.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 76.5,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "LyCun6dmCWw",
@@ -1448,17 +1662,20 @@
   "artist": "陳奕迅",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 97.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 106.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "L229QDxDakU",
-  "url": "https://www.youtube.com/watch?v=L229QDxDakU",
-  "channel": "周杰倫 Jay Chou",
+  "yt": "vsRVvOymfC8",
+  "url": "https://www.youtube.com/watch?v=vsRVvOymfC8",
+  "channel": "斑马森林 - Topic",
   "title": "周杰倫 Jay Chou【一路向北 All the Way North】-Official Music Video",
   "song": "一路向北",
   "artist": "周杰倫",
@@ -1469,7 +1686,10 @@
   "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "L229QDxDakU",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "4j0Fgmsxr-o",
@@ -1480,12 +1700,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 111.8,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 126.5,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "COhiu3c7Sgc",
@@ -1512,12 +1735,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 89.1,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 94.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "SdBwt6pyNwE",
@@ -1544,12 +1770,15 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 81.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 84.7,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "WsAwDBG6Kk8",
@@ -1560,17 +1789,20 @@
   "artist": "伍佰 & China Blue",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 60.9,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 67.9,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "4IGfp5jQaBQ",
-  "url": "https://www.youtube.com/watch?v=4IGfp5jQaBQ",
-  "channel": "NA",
+  "yt": "6VRjXgJkP2U",
+  "url": "https://www.youtube.com/watch?v=6VRjXgJkP2U",
+  "channel": "张紫宁 - Topic",
   "title": "歐得洋 Ocean 《孤單北半球 》MV",
   "song": "孤單北半球",
   "artist": "歐得洋",
@@ -1581,28 +1813,36 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "4IGfp5jQaBQ",
+  "intro": 0,
+  "audio": true
  },
  {
-  "yt": "-OiBFMi4CTk",
-  "url": "https://www.youtube.com/watch?v=-OiBFMi4CTk",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "_UyLRWEmh78",
+  "url": "https://www.youtube.com/watch?v=_UyLRWEmh78",
+  "channel": "Release - Topic",
   "title": "曹格 Gary Chaw【寂寞先生】Official Music Video",
   "song": "寂寞先生",
   "artist": "曹格",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 70.2,
   "lang": "國語",
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "-OiBFMi4CTk",
+  "intro": 0,
+  "audio": true,
+  "stop": 85.3,
+  "auto": "lrclib"
  },
  {
-  "yt": "6gba1CU3Nig",
-  "url": "https://www.youtube.com/watch?v=6gba1CU3Nig",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "6p7xkP-_iYQ",
+  "url": "https://www.youtube.com/watch?v=6p7xkP-_iYQ",
+  "channel": "Release - Topic",
   "title": "李心潔 Sinje Lee【愛錯】Official Music Video",
   "song": "愛錯",
   "artist": "李心潔",
@@ -1613,7 +1853,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "6gba1CU3Nig",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "_dsyAjwf620",
@@ -1624,33 +1867,41 @@
   "artist": "張震嶽",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 69.4,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 75.8,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "33rdx577PxY",
-  "url": "https://www.youtube.com/watch?v=33rdx577PxY",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "zw7lE2JqR0E",
+  "url": "https://www.youtube.com/watch?v=zw7lE2JqR0E",
+  "channel": "Release - Topic",
   "title": "陳綺貞 Cheer Chen【太聰明 Too smart】Official Music Video",
   "song": "太聰明",
   "artist": "陳綺貞",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 60.2,
   "lang": "國語",
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "33rdx577PxY",
+  "intro": 0,
+  "audio": true,
+  "stop": 72.1,
+  "auto": "lrclib"
  },
  {
-  "yt": "wgNRXndLex8",
-  "url": "https://www.youtube.com/watch?v=wgNRXndLex8",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "xZ4bQlo3f7s",
+  "url": "https://www.youtube.com/watch?v=xZ4bQlo3f7s",
+  "channel": "Release - Topic",
   "title": "娃娃(金智娟) WaWa【大雨】Official Music Video",
   "song": "大雨",
   "artist": "金智娟",
@@ -1661,12 +1912,15 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "wgNRXndLex8",
+  "intro": 0,
+  "audio": true
  },
  {
-  "yt": "oMDj9L44LZM",
-  "url": "https://www.youtube.com/watch?v=oMDj9L44LZM",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "Tugekp2Yj3Y",
+  "url": "https://www.youtube.com/watch?v=Tugekp2Yj3Y",
+  "channel": "Huang Pin Yuan - Topic",
   "title": "黃品源 Huang Pin Yuan【你怎麼捨得我難過 How can you allow me to be in sorrow】Official Music Video",
   "song": "你怎麼捨得我難過",
   "artist": "黃品源",
@@ -1677,7 +1931,10 @@
   "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "oMDj9L44LZM",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "BPNXyVzJjtw",
@@ -1688,12 +1945,15 @@
   "artist": "陳綺貞",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 180.6,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 193.0,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "Dw-R85AcN_w",
@@ -1704,12 +1964,15 @@
   "artist": "萬芳",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 72.9,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 81.0,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "iVhzAJuDbac",
@@ -1728,9 +1991,9 @@
   "orig": true
  },
  {
-  "yt": "OPkqtboFFYI",
-  "url": "https://www.youtube.com/watch?v=OPkqtboFFYI",
-  "channel": "NA",
+  "yt": "qqMYVifJEYg",
+  "url": "https://www.youtube.com/watch?v=qqMYVifJEYg",
+  "channel": "Release - Topic",
   "title": "伍佰 Wu Bai&China Blue【浪人情歌 Wanderer's love song】Official Music Video",
   "song": "浪人情歌",
   "artist": "伍佰 & China Blue",
@@ -1741,12 +2004,15 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "OPkqtboFFYI",
+  "intro": 0,
+  "audio": true
  },
  {
-  "yt": "tYWufUugeUc",
-  "url": "https://www.youtube.com/watch?v=tYWufUugeUc",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "Y-3sMquVJsY",
+  "url": "https://www.youtube.com/watch?v=Y-3sMquVJsY",
+  "channel": "Ella - Topic",
   "title": "莫文蔚 Karen Mok【陰天 Overcast】Official Music Video",
   "song": "陰天",
   "artist": "莫文蔚",
@@ -1757,7 +2023,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "tYWufUugeUc",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "2w7Ba8UCT_c",
@@ -1768,17 +2037,20 @@
   "artist": "陳淑樺",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 58.1,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 62.5,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "1Sn_ULGS1wM",
-  "url": "https://www.youtube.com/watch?v=1Sn_ULGS1wM",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "ntpvi1t-HM4",
+  "url": "https://www.youtube.com/watch?v=ntpvi1t-HM4",
+  "channel": "Release - Topic",
   "title": "楊乃文 Naiwen Yang【應該】Official Music Video",
   "song": "應該",
   "artist": "楊乃文",
@@ -1789,7 +2061,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "1Sn_ULGS1wM",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "xHsSWiLsIRY",
@@ -1800,12 +2075,15 @@
   "artist": "曹格",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 121.4,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 138.0,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "9LyLjifazEs",
@@ -1848,12 +2126,15 @@
   "artist": "梁靜茹",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 69.1,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 72.4,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "ZSWeurc1yMw",
@@ -1864,12 +2145,15 @@
   "artist": "任賢齊",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 24.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 30.9,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "nku5zFMZAdU",
@@ -1880,12 +2164,15 @@
   "artist": "陳淑樺",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 64.3,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 68.3,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "gD14iiXq7Xw",
@@ -1896,17 +2183,20 @@
   "artist": "林強",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 84.2,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 92.1,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "JwhHxvIuA58",
-  "url": "https://www.youtube.com/watch?v=JwhHxvIuA58",
-  "channel": "羅大佑 Lo Tayou - 主題",
+  "yt": "hfTg8GUrkcI",
+  "url": "https://www.youtube.com/watch?v=hfTg8GUrkcI",
+  "channel": "二手玫瑰 - Topic",
   "title": "戀曲1980",
   "song": "戀曲1980",
   "artist": "羅大佑",
@@ -1917,12 +2207,15 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "JwhHxvIuA58",
+  "intro": 0,
+  "audio": true
  },
  {
-  "yt": "J0Wumn2Ucmo",
-  "url": "https://www.youtube.com/watch?v=J0Wumn2Ucmo",
-  "channel": "陳綺貞 cheerego com",
+  "yt": "GXLZ8tc-q0I",
+  "url": "https://www.youtube.com/watch?v=GXLZ8tc-q0I",
+  "channel": "曾筠芯 - Topic",
   "title": "溫室花朵",
   "song": "溫室花朵",
   "artist": "陳綺貞",
@@ -1933,7 +2226,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "J0Wumn2Ucmo",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "caxiOmSWWEM",
@@ -1960,12 +2256,15 @@
   "artist": "周湯豪",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 64.0,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 6s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 67.0,
+  "intro": 6,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "cOBQgUZnceg",
@@ -1976,12 +2275,15 @@
   "artist": "蔡依林",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 20.5,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 25.8,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "vxucCfcMFCk",
@@ -1992,12 +2294,15 @@
   "artist": "告五人",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 28.1,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 34.9,
+  "intro": 0.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "ArxiApLo11I",
@@ -2040,12 +2345,15 @@
   "artist": "八三夭",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 63.8,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 70.2,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "xHq5eUR588w",
@@ -2056,28 +2364,36 @@
   "artist": "逃跑計劃",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 62.8,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 66.1,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "3J7rfx0NofU",
-  "url": "https://www.youtube.com/watch?v=3J7rfx0NofU",
-  "channel": "NA",
+  "yt": "Z8tYlaySwns",
+  "url": "https://www.youtube.com/watch?v=Z8tYlaySwns",
+  "channel": "Jeff Chang - Topic",
   "title": "張信哲 Jeff Chang [ 不要對他說 ] 官方完整版 Official MV",
   "song": "不要對他說",
   "artist": "張信哲",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 89.9,
   "lang": "國語",
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "3J7rfx0NofU",
+  "intro": 0,
+  "audio": true,
+  "stop": 93.0,
+  "auto": "lrclib"
  },
  {
   "yt": "9ksyHEWvtUo",
@@ -2104,17 +2420,22 @@
   "artist": "林良樂",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 77.4,
   "lang": "國語",
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "SIwoxSOraJc",
+  "intro": 0,
+  "audio": true,
+  "stop": 84.4,
+  "auto": "lrclib"
  },
  {
-  "yt": "T7CwPohn8lc",
-  "url": "https://www.youtube.com/watch?v=T7CwPohn8lc",
-  "channel": "Timeless Music",
+  "yt": "--NdsRpXmko",
+  "url": "https://www.youtube.com/watch?v=--NdsRpXmko",
+  "channel": "恩 EN - Topic",
   "title": "鄭中基 Ronald Cheng -《別讓我心疼》Official Lyric Video",
   "song": "別讓我心疼",
   "artist": "鄭中基",
@@ -2125,23 +2446,31 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "T7CwPohn8lc",
+  "intro": 0,
+  "audio": true
  },
  {
-  "yt": "NaROYD3bNL8",
-  "url": "https://www.youtube.com/watch?v=NaROYD3bNL8",
-  "channel": "爽朗雜貨店 (不定期更新)",
+  "yt": "EoSJ3YutYNI",
+  "url": "https://www.youtube.com/watch?v=EoSJ3YutYNI",
+  "channel": "William So - Topic",
   "title": "MV-蘇永康-男人不該讓女人流淚",
   "song": "男人不該讓女人流淚",
   "artist": "蘇永康",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 85.8,
   "lang": "國語",
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "NaROYD3bNL8",
+  "intro": 0,
+  "audio": true,
+  "stop": 92.9,
+  "auto": "lrclib"
  },
  {
   "yt": "t0igPuDjYUE",
@@ -2168,12 +2497,15 @@
   "artist": "孫燕姿",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 54.3,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 57.7,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "Zdqe9syxeoo",
@@ -2184,12 +2516,15 @@
   "artist": "鄭中基",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 88.5,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 6s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 94.6,
+  "intro": 6.0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "UrkMYEP6eXI",
@@ -2205,7 +2540,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "UrkMYEP6eXI",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "IZ8-K3YPVN0",
@@ -2216,17 +2554,20 @@
   "artist": "周華健",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 62.6,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 6s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 72.0,
+  "intro": 6,
+  "auto": "lrclib-mv"
  },
  {
-  "yt": "ymDTR22Zerw",
-  "url": "https://www.youtube.com/watch?v=ymDTR22Zerw",
-  "channel": "滾石唱片 ROCK RECORDS",
+  "yt": "Mx1RmebI95U",
+  "url": "https://www.youtube.com/watch?v=Mx1RmebI95U",
+  "channel": "Release - Topic",
   "title": "周華健 Wakin Chau【愛相隨 Love follows us】Official Music Video",
   "song": "愛相隨",
   "artist": "周華健",
@@ -2237,7 +2578,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "mv": "ymDTR22Zerw",
+  "intro": 0,
+  "audio": true
  },
  {
   "yt": "tp0tMGjylNQ",
@@ -2248,12 +2592,15 @@
   "artist": "徐佳瑩",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 38.3,
   "lang": "國語",
-  "note": "",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 41.8,
+  "intro": 0,
+  "auto": "lrclib-mv"
  },
  {
   "yt": "uNXS9y-QY04",
@@ -2280,11 +2627,14 @@
   "artist": "劉若英",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 58.1,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
+  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "stop": 64.2,
+  "intro": 0,
+  "auto": "lrclib-mv"
  }
 ]
