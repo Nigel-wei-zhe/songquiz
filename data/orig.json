@@ -8,15 +8,14 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": 68.6,
+  "start": 68.2,
   "lang": "國語",
-  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
   "orig": true,
   "stop": 72.4,
-  "intro": 0,
-  "auto": "lrclib-mv"
+  "intro": 4.6,
+  "manual": true
  },
  {
   "yt": "ocTdA8NytIc",
@@ -27,15 +26,14 @@
   "artist": "F4",
   "year": null,
   "style": "原曲",
-  "start": 87.3,
+  "start": 64.0,
   "lang": "國語",
-  "note": "副歌、停點由時間軸估算（MV 位移 0s），建議抽聽",
   "verified": true,
   "set": "原曲",
   "orig": true,
   "stop": 99.2,
-  "intro": 0.0,
-  "auto": "lrclib-mv"
+  "intro": 1.7,
+  "manual": true
  },
  {
   "yt": "0-4mm0e2h44",
@@ -46,12 +44,13 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 85.1,
   "lang": "國語",
-  "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 8.4,
+  "manual": true
  },
  {
   "yt": "oec9R5ypf-o",
@@ -81,12 +80,13 @@
   "artist": "李榮浩",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 85.4,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 3.1,
+  "manual": true
  },
  {
   "yt": "PJyFND4-zR4",
@@ -116,15 +116,16 @@
   "artist": "李榮浩",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 8.9,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
   "orig": true,
   "mv": "7LBUcOVmD6A",
   "intro": 0,
-  "audio": true
+  "audio": true,
+  "skip": true,
+  "manual": true
  },
  {
   "yt": "qzwsQTY-99o",
@@ -175,12 +176,13 @@
   "artist": "李玖哲",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 64.9,
   "lang": "國語",
-  "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 1.5,
+  "manual": true
  },
  {
   "yt": "ElSO_8jo8yE",
@@ -198,8 +200,9 @@
   "set": "原曲",
   "orig": true,
   "stop": 107.3,
-  "intro": 0.0,
-  "auto": "lrclib-mv"
+  "intro": 3.5,
+  "auto": "lrclib-mv",
+  "manual": true
  },
  {
   "yt": "Z8Mqw0b9ADs",
@@ -305,12 +308,13 @@
   "artist": "楊丞琳",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 41.9,
   "lang": "國語",
-  "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 0.5,
+  "manual": true
  },
  {
   "yt": "mt56HEafeWU",
@@ -326,7 +330,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 2.6,
+  "skip": true,
+  "manual": true
  },
  {
   "yt": "LE6eJGThhcI",
@@ -363,7 +370,10 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 1.7,
+  "skip": true,
+  "manual": true
  },
  {
   "yt": "cKRbMErj1LU",
@@ -379,7 +389,9 @@
   "note": "不確定是不是官方版，建議試聽",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 0.0,
+  "manual": true
  },
  {
   "yt": "q-kU3Um3_wc",
@@ -428,12 +440,13 @@
   "artist": "薛之謙",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 90.5,
   "lang": "國語",
-  "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 2.4,
+  "manual": true
  },
  {
   "yt": "zvUsOXNPVxo",
@@ -463,12 +476,13 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 86.4,
   "lang": "國語",
-  "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 0.0,
+  "manual": true
  },
  {
   "yt": "SW3OQ0ijUCI",
@@ -479,12 +493,13 @@
   "artist": "周杰倫",
   "year": null,
   "style": "原曲",
-  "start": null,
+  "start": 74.3,
   "lang": "國語",
-  "note": "",
   "verified": true,
   "set": "原曲",
-  "orig": true
+  "orig": true,
+  "intro": 0.0,
+  "manual": true
  },
  {
   "yt": "Y2ge3KrdeWs",
