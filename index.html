@@ -21,10 +21,10 @@ body{background:radial-gradient(ellipse at 50% -10%,#3a0f3a 0%,transparent 55%),
 .scr.on{display:flex}
 button{font:inherit;color:#eee;background:var(--glass);border:2px solid #3a2a48;border-radius:14px;padding:12px 16px;cursor:pointer;touch-action:manipulation}
 button:active{transform:scale(.97)}
-.big{width:100%;max-width:420px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:22px;letter-spacing:.15em;text-indent:.15em;padding:18px;border-radius:18px}
+button:disabled{opacity:.4}
+.big{width:100%;max-width:420px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:22px;letter-spacing:.15em;text-indent:.15em;padding:18px;border-radius:18px;flex:none}
 .main{border-color:var(--pinkL);color:var(--core);background:linear-gradient(#2a0a26,#16061a);box-shadow:0 0 0 2px #5a2a50,0 0 14px var(--pink),inset 0 0 14px rgba(255,47,174,.5);text-shadow:0 0 8px var(--pink)}
 .sub{border-color:#2f5a6a;color:var(--cyanL)}
-button:disabled{opacity:.4}
 .row{display:flex;gap:10px;width:100%;max-width:420px}
 .row>button{flex:1}
 .lbl{width:100%;max-width:420px;color:var(--cyanL);font-size:13px;letter-spacing:.1em;margin-top:6px}
@@ -42,43 +42,69 @@ button:disabled{opacity:.4}
 .pl input:focus{border-color:var(--pinkL)}
 .pl button{width:46px;padding:10px 0;color:var(--dim)}
 #addP{width:100%;max-width:420px;border-style:dashed;color:var(--dim)}
+#modes{display:flex;flex-direction:column;gap:8px;width:100%;max-width:420px}
+.md{text-align:left;padding:12px 14px;border-color:#33243f;color:#a99bb8;display:flex;flex-direction:column;gap:2px}
+.md b{font-size:17px;color:#cfc4dc}
+.md span{font-size:13px;color:var(--dim)}
+.md.on{border-color:var(--cyanL);box-shadow:0 0 10px var(--cyan),inset 0 0 8px rgba(20,200,255,.3)}
+.md.on b{color:#fff}
 #how{color:var(--dim);font-size:13px;width:100%;max-width:420px;line-height:1.8}
 #how b{color:#ddd}
 
+/* 關卡卡片 */
+#card{justify-content:center;text-align:center}
+#cardNo{color:var(--cyanL);letter-spacing:.3em;font-size:14px}
+#cardT{font-size:42px;line-height:1.2;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+#cardD{color:#ddd;max-width:360px}
+#cardPts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:380px}
+#cardPts span{border:1px solid #3a2a48;border-radius:10px;padding:6px 10px;font-size:14px;color:#cfc4dc;background:var(--glass)}
+#cardPts b{color:var(--amber);font-family:"DotGothic16";font-weight:400;margin-left:4px}
+
 /* 遊戲中 */
-#top{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--dim)}
+#top{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--dim);gap:8px}
 #top .q{font-size:18px}
+#modeTag{color:var(--cyanL);font-size:13px;border:1px solid #2f5a6a;border-radius:999px;padding:2px 10px;white-space:nowrap}
 #quit{padding:6px 12px;font-size:13px;color:var(--dim)}
 #stage{position:relative;width:100%;max-width:520px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;flex:none;border:2px solid #2a1d36}
 #player,#stage iframe{position:absolute;inset:0;width:100%;height:100%}
 #cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:radial-gradient(circle at 50% 45%,#2a0f2e,#0b0610 70%);z-index:2}
 #cover.off{display:none}
-#ring{--p:0;width:120px;height:120px;border-radius:50%;display:grid;place-items:center;
+#ring{--p:0;width:116px;height:116px;border-radius:50%;display:grid;place-items:center;
   background:conic-gradient(var(--pink) calc(var(--p)*1turn),#2a1d36 0);box-shadow:0 0 18px rgba(255,47,174,.4)}
-#ring>div{width:100px;height:100px;border-radius:50%;background:#0d0712;display:grid;place-items:center;font-size:40px}
-#coverTx{font-size:15px;color:var(--dim);margin-top:6px}
-#eq{display:flex;gap:4px;height:22px;align-items:flex-end}
+#ring>div{width:96px;height:96px;border-radius:50%;background:#0d0712;display:grid;place-items:center;font-size:38px}
+#coverTx{font-size:15px;color:var(--dim);margin-top:6px;min-height:22px}
+#eq{display:flex;gap:4px;height:20px;align-items:flex-end}
 #eq i{width:5px;background:var(--cyan);border-radius:3px;height:30%;box-shadow:0 0 6px var(--cyan)}
 #eq.go i{animation:eq .8s ease-in-out infinite alternate}
 #eq i:nth-child(2){animation-delay:-.3s}#eq i:nth-child(3){animation-delay:-.6s}#eq i:nth-child(4){animation-delay:-.15s}#eq i:nth-child(5){animation-delay:-.45s}
 @keyframes eq{to{height:100%}}
-#hint{text-align:center;font-size:26px;min-height:40px}
-#hint small{display:block;font-family:"Noto Sans TC";font-weight:400;font-size:14px;color:var(--dim);text-shadow:none;letter-spacing:0}
+#ask{display:flex;align-items:center;gap:10px;font-size:15px;color:#ddd}
+#ptNow{font-family:"Zen Maru Gothic";font-weight:900;font-size:15px;color:var(--core);border:2px solid var(--pinkL);border-radius:999px;padding:2px 12px;box-shadow:0 0 10px var(--pink)}
+#ptNow.x2{border-color:var(--amber);box-shadow:0 0 12px var(--amber);color:#fff4dc}
+#steps{display:flex;gap:6px}
+#steps i{width:26px;height:6px;border-radius:3px;background:#2a1d36}
+#steps i.on{background:var(--pink);box-shadow:0 0 6px var(--pink)}
+#steps i.done{background:#5a2a50}
+#hint{text-align:center;font-size:24px;min-height:36px;line-height:1.3}
+#hint small{display:block;font-family:"Noto Sans TC";font-weight:400;font-size:14px;color:var(--dim);text-shadow:none;letter-spacing:0;margin-top:2px}
 
 /* 公布 */
 #ans{width:100%;max-width:520px;text-align:center}
-#ansSong{font-size:34px;line-height:1.25;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+#ansAsk{color:var(--cyanL);font-size:13px;letter-spacing:.1em}
+#ansBig{font-size:34px;line-height:1.25;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
 #ansMeta{color:#ddd;font-size:16px;margin-top:4px}
 #ansMeta .y{color:var(--amber);font-family:"DotGothic16"}
 #ansStyle{color:var(--cyanL);font-size:13px;margin-top:2px}
 @keyframes pop{from{transform:scale(.6);opacity:0}}
+#bOrig{padding:8px 14px;font-size:14px}
 #who{width:100%;max-width:520px}
 #whoT{color:var(--cyanL);font-size:13px;letter-spacing:.1em;margin-bottom:8px;text-align:center}
+#whoT b{color:var(--amber);font-family:"DotGothic16";font-weight:400;font-size:15px}
 #chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
 .chip{padding:12px 8px;border-radius:14px;font-size:17px;display:flex;flex-direction:column;align-items:center;gap:2px}
 .chip .sc{font-size:15px}
 .chip.on{border-color:var(--green);color:#fff;box-shadow:0 0 12px #00e676,inset 0 0 10px rgba(0,230,118,.35)}
-.chip.on .sc::after{content:" +1";color:var(--green)}
+.chip.on .sc::after{content:" +" attr(data-pt);color:var(--green)}
 
 /* 結束 */
 #endT{font-size:34px;margin-top:20px}
@@ -90,13 +116,9 @@ button:disabled{opacity:.4}
 .rk .s{font-size:24px}
 #endInfo{color:var(--dim);font-size:13px}
 
-#toast{position:fixed;left:50%;bottom:calc(24px + var(--pb));transform:translateX(-50%);background:var(--glass);border:1px solid var(--cyan);padding:8px 16px;border-radius:10px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9;font-size:14px}
+#toast{position:fixed;left:50%;bottom:calc(24px + var(--pb));transform:translateX(-50%);background:var(--glass);border:1px solid var(--cyan);padding:8px 16px;border-radius:10px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9;font-size:14px;white-space:nowrap}
 #toast.on{opacity:1}
-@media (orientation:landscape) and (max-height:500px){
-  #stage{max-width:360px}
-  #game.on{flex-direction:row;flex-wrap:wrap;justify-content:center;align-content:flex-start}
-  #top{max-width:none}
-}
+@media (prefers-reduced-motion:reduce){#eq.go i,#cardT,#ansBig{animation:none}}
 </style>
 </head>
 <body>
@@ -104,53 +126,62 @@ button:disabled{opacity:.4}
 <!-- 開場 -->
 <section class="scr on" id="setup">
   <div id="title" class="neon">原曲是哪首？</div>
-  <div id="tagline">歌被改到認不出來，你還聽得出原曲嗎</div>
+  <div id="tagline">原曲、改編混著來，看誰耳朵最靈</div>
 
   <div class="lbl">玩家</div>
   <div id="plist"></div>
   <button id="addP">＋ 加一位</button>
 
-  <div class="lbl">題庫</div>
-  <div class="pills" id="sets"></div>
+  <div class="lbl">關卡（照順序進行，可以多選）</div>
+  <div id="modes"></div>
 
-  <div class="lbl">難度</div>
-  <div class="pills" id="lv"></div>
+  <div class="lbl">改編題庫</div>
+  <div class="pills" id="sets"></div>
 
   <div class="lbl">題數</div>
   <div class="pills" id="nq"></div>
 
-  <div class="lbl">每題聽幾秒</div>
-  <div class="pills" id="cl"></div>
-
   <button class="big main" id="start">開始</button>
-  <div id="how"><b>玩法</b>　按「播放」後把手機<b>蓋在桌上</b>，大家搶著喊出原曲歌名。有人答出來就翻開手機按「公布答案」，點答對的人加分。</div>
+  <div id="how"><b>玩法</b>　手機放桌上播歌，大家搶著喊答案，先喊先答，<b>答錯這題就不能再答</b>。越早猜到分數越高；<b>最後一題分數加倍</b>。有人答對就按「公布答案」，點答對的人加分。</div>
 </section>
 
-<!-- 遊戲中 -->
+<!-- 關卡卡片 -->
+<section class="scr" id="card">
+  <div id="cardNo"></div>
+  <div id="cardT" class="neon"></div>
+  <div id="cardD"></div>
+  <div id="cardPts"></div>
+  <button class="big main" id="bCard">開始這關</button>
+</section>
+
+<!-- 遊戲中（播放與公布共用，播放器 iframe 不搬動） -->
 <section class="scr" id="game">
-  <div id="top"><span>第 <span class="num q" id="qn">1</span> / <span class="num" id="qt">10</span> 題</span><button id="quit">結束</button></div>
+  <div id="top"><span>第 <span class="num q" id="qn">1</span> / <span class="num" id="qt">10</span> 題</span><span id="modeTag"></span><button id="quit">結束</button></div>
   <div id="stage">
     <div id="player"></div>
     <div id="cover">
-      <div id="ring"><div class="num" id="sec">20</div></div>
+      <div id="ring"><div class="num" id="sec">0</div></div>
       <div id="eq"><i></i><i></i><i></i><i></i><i></i></div>
-      <div id="coverTx">準備好了就按播放</div>
+      <div id="coverTx"></div>
     </div>
   </div>
-  <div id="pPlay" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%">
-  <div id="hint" class="neonC"></div>
-  <button class="big main" id="bMain">播放</button>
-  <div class="row"><button class="sub" id="bMore">再聽 10 秒</button><button class="sub" id="bAgain">從頭再聽</button><button class="sub" id="bHint">提示</button></div>
-  <div class="row"><button id="bBad" style="color:var(--dim);border-color:#2a1d36">這首播不了，換一首</button></div>
+  <div id="pPlay" style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%">
+    <div id="ask"><span id="askTx"></span><span id="ptNow"></span><span id="steps"></span></div>
+    <div id="hint" class="neonC"></div>
+    <button class="big main" id="bMain">播放</button>
+    <div class="row"><button class="sub" id="bStep"></button><button class="sub" id="bAgain">重聽這段</button></div>
+    <div class="row"><button id="bBad" style="color:var(--dim);border-color:#2a1d36">這首播不了，換一首</button></div>
   </div>
   <div id="pRev" style="display:none;flex-direction:column;align-items:center;gap:14px;width:100%">
-  <div id="ans">
-    <div id="ansSong" class="neon"></div>
-    <div id="ansMeta"></div>
-    <div id="ansStyle"></div>
-  </div>
-  <div id="who"><div id="whoT">誰答對了？（可以點多位）</div><div id="chips"></div></div>
-  <button class="big main" id="bNext">下一題</button>
+    <div id="ans">
+      <div id="ansAsk"></div>
+      <div id="ansBig" class="neon"></div>
+      <div id="ansMeta"></div>
+      <div id="ansStyle"></div>
+    </div>
+    <button class="sub" id="bOrig">聽原曲</button>
+    <div id="who"><div id="whoT"></div><div id="chips"></div></div>
+    <button class="big main" id="bNext">下一題</button>
   </div>
 </section>
 
@@ -166,174 +197,211 @@ button:disabled{opacity:.4}
 <div id="toast"></div>
 
 <script>
+{
 // ===== 資料與設定 =====
-const SETS = [ // 題庫分組：key → 顯示名稱、哪些來源
+const SETS = [ // 改編題庫分組
   {k:'bj',  n:'黑杰倫爵士', src:['黑杰倫']},
   {k:'band',n:'樂團重新詮釋', src:['滾石唱片 ROCK RECORDS']},
   {k:'rnb', n:'R&B 老歌', src:['Capybara96']},
   {k:'edm', n:'EDM', src:['Priscilla Abby 蔡恩雨']},
   {k:'acap',n:'阿卡貝拉', src:['尋人啟事 The Wanted']},
 ];
-const DEF_START = 30;
-const LS = 'sqCfg', LSP = 'sqPlayed';
-let ALL = [];
-let cfg = Object.assign({players:['玩家 1','玩家 2','玩家 3'], sets:['bj','band','rnb','edm','acap'], nq:10, clip:20, lv:'mid'}, JSON.parse(localStorage.getItem(LS) || '{}'));
-let G = null;            // 一局的狀態
-let player = null, ytReady = false, stopAt = 0, tick = null, wake = null;
+// 關卡：每一段（step）有自己的影片、長度、分數、提示
+const MODES = {
+  intro: {n:'前奏秒殺', ask:'猜歌名', d:'原曲從第一個音開始，只放 1 秒；猜不到再放 3 秒、5 秒。',
+          pts:[['1 秒',3],['3 秒',2],['5 秒',1]]},
+  ladder:{n:'改編三段式', ask:'猜歌名', d:'先聽改編版；猜不到給提示再聽一次；還不行就換播原曲。',
+          pts:[['改編',3],['改編＋提示',2],['原曲',1]]},
+  artist:{n:'猜原唱', ask:'猜原唱是誰', d:'聽改編版，這關不猜歌名，猜原本是誰唱的。',
+          pts:[['改編',2],['給歌名',1]]},
+};
+const ORDER = ['intro', 'ladder', 'artist'];
+const DEF_START = 30, CLIP = 20;
+const LS = 'sqCfg2', LSP = 'sqPlayed';
+let ALL = [], ORIG = [];
+let cfg = {players:['玩家 1','玩家 2','玩家 3'], sets:SETS.map(s => s.k), modes:[...ORDER], nq:10};
+try { Object.assign(cfg, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
+let G = null, player = null, ytReady = false, loaded = '', stopAt = 0, tick = null, wake = null;
+window.__dbg = {get G() { return G; }, get ORIG() { return ORIG; }}; // 測試用
 
 const $ = id => document.getElementById(id);
 const show = id => document.querySelectorAll('.scr').forEach(s => s.classList.toggle('on', s.id === id));
 const toast = t => { const m = $('toast'); m.textContent = t; m.classList.add('on'); clearTimeout(m._t); m._t = setTimeout(() => m.classList.remove('on'), 1800); };
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const save = () => localStorage.setItem(LS, JSON.stringify(cfg));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const save = () => { try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch (e) {} };
 const setOf = x => SETS.find(s => s.src.includes(x.set || x.channel));
-const pool = () => ALL.filter(x => !x.skip && cfg.sets.includes(setOf(x)?.k));
-// 難度＝原曲佔幾成；原曲只出選中題庫裡有的歌
-const LV = [{k:'easy',n:'簡單',d:'大多是原曲',r:.7},{k:'mid',n:'普通',d:'原曲改編各半',r:.4},{k:'hard',n:'困難',d:'全部改編',r:0}];
-let ORIG = [];
-const origPool = () => { const ss = new Set(pool().map(x => x.song)); return ORIG.filter(x => !x.skip && ss.has(x.song)); };
+const covers = () => ALL.filter(x => !x.skip && cfg.sets.includes(setOf(x)?.k));
+const origOf = song => ORIG.find(o => o.song === song && !o.skip);
+const startOf = v => v.start != null ? v.start : DEF_START;
 
-// ===== 開場畫面 =====
+// ===== 開場 =====
 function paintSetup() {
-  $('plist').innerHTML = cfg.players.map((n, i) => `<div class="pl"><input value="${esc(n)}" data-i="${i}" maxlength="8" enterkeyhint="done"><button data-del="${i}">✕</button></div>`).join('');
-  $('sets').innerHTML = SETS.map(s => {
-    const c = ALL.filter(x => !x.skip && setOf(x) === s).length;
-    return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : '';
-  }).join('');
-  $('lv').innerHTML = LV.map(l => `<button class="pill${cfg.lv === l.k ? ' on' : ''}" data-lv="${l.k}">${l.n}<small>${l.d}</small></button>`).join('');
-  $('nq').innerHTML = [10, 15, 20, 30].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
-  $('cl').innerHTML = [10, 15, 20, 30].map(n => `<button class="pill${cfg.clip === n ? ' on' : ''}" data-cl="${n}">${n} 秒</button>`).join('') ;
+  $('plist').innerHTML = cfg.players.map((n, i) => `<div class="pl"><input value="${esc(n)}" data-i="${i}" maxlength="8" enterkeyhint="done"><button data-del="${i}" aria-label="移除">✕</button></div>`).join('');
+  $('modes').innerHTML = ORDER.map(k => { const m = MODES[k];
+    return `<button class="md${cfg.modes.includes(k) ? ' on' : ''}" data-md="${k}"><b>${m.n}</b><span>${m.d}</span></button>`; }).join('');
+  $('sets').innerHTML = SETS.map(s => { const c = ALL.filter(x => !x.skip && setOf(x) === s).length;
+    return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : ''; }).join('');
+  $('nq').innerHTML = [6, 10, 15, 20].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
 }
 $('plist').addEventListener('input', e => { if (e.target.dataset.i != null) { cfg.players[+e.target.dataset.i] = e.target.value; save(); } });
 $('plist').addEventListener('click', e => {
-  const d = e.target.dataset.del; if (d == null) return;
+  const d = e.target.closest('[data-del]')?.dataset.del; if (d == null) return;
   if (cfg.players.length <= 1) return toast('至少要一位玩家');
   cfg.players.splice(+d, 1); save(); paintSetup();
 });
 $('addP').onclick = () => { if (cfg.players.length >= 10) return toast('最多 10 位'); cfg.players.push('玩家 ' + (cfg.players.length + 1)); save(); paintSetup(); };
 $('setup').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.set) { const k = b.dataset.set, i = cfg.sets.indexOf(k); i >= 0 ? cfg.sets.splice(i, 1) : cfg.sets.push(k); }
-  else if (b.dataset.lv) cfg.lv = b.dataset.lv;
+  const tog = (arr, k) => { const i = arr.indexOf(k); i >= 0 ? arr.splice(i, 1) : arr.push(k); };
+  if (b.dataset.md) tog(cfg.modes, b.dataset.md);
+  else if (b.dataset.set) tog(cfg.sets, b.dataset.set);
   else if (b.dataset.nq) cfg.nq = +b.dataset.nq;
-  else if (b.dataset.cl) cfg.clip = +b.dataset.cl;
   else return;
   save(); paintSetup();
 });
 $('start').onclick = () => {
   cfg.players = cfg.players.map((n, i) => n.trim() || '玩家 ' + (i + 1)); save();
-  if (!pool().length) return toast('至少選一個題庫');
+  if (!cfg.modes.length) return toast('至少選一個關卡');
+  if (!covers().length && cfg.modes.some(k => k !== 'intro')) return toast('至少選一個改編題庫');
   newGame();
 };
 
-// ===== 出題：避開最近玩過的 =====
-function pickSongs(n) {
-  let played = JSON.parse(localStorage.getItem(LSP) || '[]');
-  const draw = (p, k, avoid) => { // 從 p 抽 k 首，先抽沒玩過的，同一首歌不重複
-    p = p.filter(x => !avoid.has(x.song));
-    const fresh = p.filter(x => !played.includes(x.yt)).sort(() => Math.random() - .5);
-    const old = p.filter(x => played.includes(x.yt)).sort(() => Math.random() - .5);
-    const out = [];
-    for (const x of [...fresh, ...old]) { if (out.length >= k) break; if (!avoid.has(x.song)) { out.push(x); avoid.add(x.song); } }
-    return out;
-  };
-  const r = (LV.find(l => l.k === cfg.lv) || LV[1]).r, avoid = new Set();
-  const o = draw(origPool(), Math.round(n * r), avoid);
-  const c = draw(pool(), n - o.length, avoid);
-  const out = [...o, ...c].sort(() => Math.random() - .5);
-  localStorage.setItem(LSP, JSON.stringify([...played.filter(y => !out.some(x => x.yt === y)), ...out.map(x => x.yt)].slice(-400)));
-  return out;
+// ===== 出題 =====
+function buildQuestions() {
+  let played = [];
+  try { played = JSON.parse(localStorage.getItem(LSP) || '[]'); } catch (e) {}
+  const modes = ORDER.filter(k => cfg.modes.includes(k));
+  const per = modes.map((k, i) => Math.floor(cfg.nq / modes.length) + (i < cfg.nq % modes.length ? 1 : 0));
+  const used = new Set(), qs = [];
+  const fresh = arr => { const f = arr.filter(x => !played.includes(x.yt)), o = arr.filter(x => played.includes(x.yt));
+    const sh = a => a.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(v => v[1]);
+    return [...sh(f), ...sh(o)]; };
+  const songsInSets = new Set(covers().map(x => x.song));
+  modes.forEach((k, mi) => {
+    let cand;
+    if (k === 'intro') cand = fresh(ORIG.filter(o => !o.skip && (songsInSets.has(o.song) || !songsInSets.size)));
+    else if (k === 'ladder') { const c = fresh(covers()); cand = [...c.filter(x => origOf(x.song)), ...c.filter(x => !origOf(x.song))]; }
+    else cand = fresh(covers());
+    let n = 0;
+    for (const x of cand) { if (n >= per[mi]) break; if (used.has(x.song)) continue; used.add(x.song); qs.push(makeQ(k, x)); n++; }
+  });
+  if (qs.length) qs[qs.length - 1].x2 = true;
+  try { localStorage.setItem(LSP, JSON.stringify([...played.filter(y => !qs.some(q => q.ids.includes(y))), ...qs.flatMap(q => q.ids)].slice(-400))); } catch (e) {}
+  return qs;
+}
+function makeQ(mode, x) {
+  const chars = [...x.song], h1 = `${chars.length} 個字，第一個字「${esc(chars[0])}」`;
+  let steps;
+  if (mode === 'intro') steps = [1, 3, 5].map((len, i) => ({v: x, start: x.intro || 0, len, pt: 3 - i}));
+  else if (mode === 'ladder') { const o = origOf(x.song);
+    steps = [{v: x, start: startOf(x), len: CLIP, pt: 3}, {v: x, start: startOf(x), len: CLIP, pt: 2, hint: h1},
+             o ? {v: o, start: startOf(o), len: CLIP, pt: 1, hint: h1, tag: '原曲'} : {v: x, start: startOf(x), len: CLIP, pt: 1, hint: h1 + `<small>原唱：${esc(x.artist)}</small>`}]; }
+  else steps = [{v: x, start: startOf(x), len: CLIP, pt: 2}, {v: x, start: startOf(x), len: CLIP, pt: 1, hint: `歌名是「${esc(x.song)}」`}];
+  return {mode, song: x.song, artist: x.artist, year: x.year, style: x.orig ? '原曲' : x.style, steps, ids: steps.map(s => s.v.yt), cover: x.orig ? null : x, orig: x.orig ? x : origOf(x.song)};
 }
 
 function newGame() {
-  const qs = pickSongs(cfg.nq);
-  G = {qs, i: 0, score: cfg.players.map(() => 0), got: new Set()};
+  const qs = buildQuestions();
+  if (!qs.length) return toast('題庫不夠，換個選擇');
+  G = {qs, i: 0, score: cfg.players.map(() => 0)};
   $('qt').textContent = qs.length;
   keepAwake();
+  nextQ();
+}
+function nextQ() { // 換關時先出卡片
+  const q = G.qs[G.i], prev = G.qs[G.i - 1];
+  if (!prev || prev.mode !== q.mode) return roundCard(q.mode);
   question();
 }
+function roundCard(k) {
+  const m = MODES[k], mods = [...new Set(G.qs.map(q => q.mode))];
+  $('cardNo').textContent = `第 ${'一二三四'[mods.indexOf(k)]} 關`;
+  $('cardT').textContent = m.n;
+  $('cardD').textContent = m.d;
+  $('cardPts').innerHTML = m.pts.map(([n, p]) => `<span>${n}<b>${p}</b> 分</span>`).join('');
+  $('cardT').style.animation = 'none'; void $('cardT').offsetWidth; $('cardT').style.animation = '';
+  stopVid();
+  show('card');
+}
+$('bCard').onclick = () => question();
 
-// ===== 一題的流程：待播 → 播放中（蓋著）→ 片段結束 → 公布 =====
-// st: 'ready' | 'play' | 'pause'
+// ===== 一題：ready → play → pause →（下一段）… → reveal =====
 function question() {
   const q = G.qs[G.i];
-  G.st = 'ready'; G.heard = 0; G.got = new Set(); G.hint = 0;
-  $('bHint').textContent = '提示'; $('bHint').disabled = false;
+  G.st = 'ready'; G.step = 0; G.got = new Set();
   $('qn').textContent = G.i + 1;
+  $('modeTag').textContent = MODES[q.mode].n;
   phase('play');
   $('cover').classList.remove('off');
-  $('sec').textContent = cfg.clip; $('ring').style.setProperty('--p', 0);
+  paintStep();
+  $('hint').innerHTML = '';
   $('coverTx').textContent = '準備好了就按播放';
   $('eq').classList.remove('go');
-  $('hint').innerHTML = '';
   $('bMain').textContent = '播放';
-  $('bMore').style.visibility = $('bAgain').style.visibility = $('bHint').style.visibility = 'hidden';
   show('game');
-  if (ytReady) player.cueVideoById({videoId: q.yt, startSeconds: startOf(q)});
+  cue(q.steps[0]);
 }
-const startOf = q => q.start != null ? q.start : DEF_START;
+const ptOf = q => q.steps[G.step].pt * (q.x2 ? 2 : 1);
+function paintStep() {
+  const q = G.qs[G.i], s = q.steps[G.step], nx = q.steps[G.step + 1];
+  $('askTx').textContent = MODES[q.mode].ask;
+  $('ptNow').textContent = (q.x2 ? '雙倍 ' : '') + ptOf(q) + ' 分';
+  $('ptNow').classList.toggle('x2', !!q.x2);
+  $('steps').innerHTML = q.steps.map((_, i) => `<i class="${i === G.step ? 'on' : i < G.step ? 'done' : ''}"></i>`).join('');
+  $('sec').textContent = s.len;
+  $('ring').style.setProperty('--p', 0);
+  $('bStep').textContent = nx ? `${q.mode === 'intro' ? '再放 ' + nx.len + ' 秒' : nx.tag ? '換聽原曲' : '給提示'}・${nx.pt * (q.x2 ? 2 : 1)} 分` : '';
+  const vis = G.st !== 'ready';
+  $('bStep').style.visibility = nx && vis ? 'visible' : 'hidden';
+  $('bAgain').style.visibility = vis ? 'visible' : 'hidden';
+  if (s.hint) $('hint').innerHTML = s.hint;
+}
 
-function playFrom(t, len) {
-  const q = G.qs[G.i];
+function cue(s) { if (!ytReady) return; player.cueVideoById({videoId: s.v.yt, startSeconds: s.start}); loaded = s.v.yt; }
+function stopVid() { clearInterval(tick); if (ytReady) player.pauseVideo(); }
+function playStep() {
+  const q = G.qs[G.i], s = q.steps[G.step];
   if (!ytReady) return toast('播放器還沒準備好，稍等一下');
-  stopAt = t + len;
-  player.loadVideoById({videoId: q.yt, startSeconds: t});
-  player.playVideo();
+  stopAt = s.start + s.len; G.wait = 0;
+  if (loaded === s.v.yt) { player.seekTo(s.start, true); player.playVideo(); }
+  else { player.loadVideoById({videoId: s.v.yt, startSeconds: s.start}); loaded = s.v.yt; }
   G.st = 'play';
   $('eq').classList.add('go');
   $('coverTx').textContent = '';
-  if (!G.hint) $('hint').innerHTML = '蓋上手機！<small>大家搶著喊出原曲</small>';
+  if (!s.hint) $('hint').innerHTML = q.mode === 'intro' ? '仔細聽！' : '大家搶答<small>先喊先答，答錯這題不能再答</small>';
   $('bMain').textContent = '公布答案';
-  $('bMore').style.visibility = $('bAgain').style.visibility = $('bHint').style.visibility = 'visible';
-  clearInterval(tick); tick = setInterval(onTick, 200);
+  paintStep();
+  clearInterval(tick); tick = setInterval(onTick, 50);
 }
 function onTick() {
   if (!ytReady || G.st !== 'play') return;
-  if (player.getPlayerState() !== 1) { // 還在緩衝，不倒數；卡太久多半是被擋自動播放
-    G.wait = (G.wait || 0) + 1;
-    $('coverTx').textContent = G.wait > 15 ? '沒聲音？點一下「從頭再聽」' : '載入中…';
-    return;
+  const s = G.qs[G.i].steps[G.step];
+  if (player.getPlayerState() !== 1) { // 緩衝中不倒數；卡太久多半是被擋自動播放
+    G.wait++; $('coverTx').textContent = G.wait > 60 ? '沒聲音？點一下「重聽這段」' : '載入中…'; return;
   }
   G.wait = 0; $('coverTx').textContent = '';
-  const now = player.getCurrentTime();
-  const left = Math.max(0, stopAt - now);
+  const left = Math.max(0, stopAt - player.getCurrentTime());
   $('sec').textContent = Math.ceil(left);
-  $('ring').style.setProperty('--p', Math.min(1, 1 - left / Math.max(1, G.len || cfg.clip)));
-  if (left <= 0.05) {
+  $('ring').style.setProperty('--p', Math.min(1, 1 - left / s.len));
+  if (left <= 0.04) {
     player.pauseVideo(); G.st = 'pause'; clearInterval(tick);
     $('eq').classList.remove('go');
     $('coverTx').textContent = '時間到';
-    if (!G.hint) $('hint').innerHTML = '猜到了嗎？<small>翻開公布答案，或再聽、看提示</small>';
-    beep();
+    const q = G.qs[G.i], nx = q.steps[G.step + 1];
+    if (!s.hint) $('hint').innerHTML = nx ? '猜到了嗎？<small>沒人猜到就往下一段，分數會變少</small>' : '最後機會！<small>猜不到就公布答案</small>';
+    if (s.len > 5) beep();
   }
 }
-$('bMain').onclick = () => {
-  if (G.st === 'ready') { G.len = cfg.clip; playFrom(startOf(G.qs[G.i]), cfg.clip); }
-  else reveal();
-};
-$('bMore').onclick = () => { // 從停下的地方往後多聽 10 秒
-  const now = player.getCurrentTime();
-  G.len = 10; G.heard++;
-  if (G.st === 'play') { stopAt += 10; G.len = stopAt - now; return toast('多聽 10 秒'); }
-  playFrom(now, 10);
-};
-$('bAgain').onclick = () => { G.len = cfg.clip; playFrom(startOf(G.qs[G.i]), cfg.clip); };
+$('bMain').onclick = () => { G.st === 'ready' ? playStep() : reveal(); };
+$('bStep').onclick = () => { G.step++; playStep(); };
+$('bAgain').onclick = () => playStep();
 $('bBad').onclick = () => skipBad();
-$('bHint').onclick = () => { // 第一次：字數＋第一個字；第二次：原唱
-  const q = G.qs[G.i], chars = [...q.song];
-  G.hint = Math.min(2, G.hint + 1);
-  let h = `${chars.length} 個字，第一個字「${esc(chars[0])}」`;
-  if (G.hint >= 2) h += `<small>原唱：${esc(q.artist)}</small>`;
-  $('hint').innerHTML = h;
-  $('bHint').textContent = G.hint >= 2 ? '提示已用完' : '再一個提示';
-  $('bHint').disabled = G.hint >= 2;
-};
-function skipBad() {
-  // 換一首同題庫的，沒有就跳過
-  const used = new Set(G.qs.map(x => x.yt));
-  const rep = pool().find(x => !used.has(x.yt));
-  clearInterval(tick); if (ytReady) player.stopVideo();
-  if (rep) { G.qs[G.i] = rep; toast('換了一首'); question(); }
+function skipBad() { // 換一首同關卡的
+  const q = G.qs[G.i], used = new Set(G.qs.map(x => x.song));
+  let cand = q.mode === 'intro' ? ORIG.filter(o => !o.skip) : covers();
+  cand = cand.filter(x => !used.has(x.song)).sort(() => Math.random() - .5);
+  stopVid();
+  if (cand[0]) { const nq = makeQ(q.mode, cand[0]); nq.x2 = q.x2; G.qs[G.i] = nq; toast('換了一首'); question(); }
   else { G.qs.splice(G.i, 1); $('qt').textContent = G.qs.length; G.i < G.qs.length ? question() : finish(); }
 }
 
@@ -342,31 +410,40 @@ function reveal() {
   const q = G.qs[G.i];
   clearInterval(tick);
   if (G.st !== 'play') player.playVideo(); // 公布時讓歌繼續播
-  G.st = 'reveal';
+  G.st = 'reveal'; G.pt = ptOf(q);
   phase('rev');
   $('cover').classList.add('off');
-  $('ansSong').textContent = q.song;
-  $('ansSong').style.animation = 'none'; void $('ansSong').offsetWidth; $('ansSong').style.animation = '';
-  $('ansMeta').innerHTML = `${esc(q.artist)}${q.year ? '　<span class="y">' + q.year + '</span>' : ''}`;
-  $('ansStyle').textContent = q.orig ? '原曲' : (q.style || '改編');
+  $('eq').classList.remove('go');
+  const art = q.mode === 'artist';
+  $('ansAsk').textContent = art ? '原唱是' : '這首是';
+  $('ansBig').textContent = art ? q.artist : q.song;
+  $('ansBig').style.animation = 'none'; void $('ansBig').offsetWidth; $('ansBig').style.animation = '';
+  $('ansMeta').innerHTML = (art ? esc(q.song) : esc(q.artist)) + (q.year ? '　<span class="y">' + esc(q.year) + '</span>' : '');
+  const playing = q.steps[G.step];
+  $('ansStyle').textContent = playing.tag || (playing.v.orig ? '原曲' : (playing.v.style || '改編'));
+  // 正在播改編、又有原曲 → 可以接著聽原曲對照
+  const o = q.orig;
+  $('bOrig').style.display = o && !playing.v.orig ? '' : 'none';
+  $('whoT').innerHTML = `誰答對了？答對 <b>+${G.pt}</b> 分（可以點多位）`;
   paintChips();
   $('bNext').textContent = G.i + 1 >= G.qs.length ? '看排名' : '下一題';
 }
+$('bOrig').onclick = () => { const o = G.qs[G.i].orig; if (!o) return;
+  player.loadVideoById({videoId: o.yt, startSeconds: startOf(o)}); loaded = o.yt;
+  $('ansStyle').textContent = '原曲'; $('bOrig').style.display = 'none'; };
 function paintChips() {
-  $('chips').innerHTML = cfg.players.map((n, i) => `<button class="chip${G.got.has(i) ? ' on' : ''}" data-p="${i}"><span>${esc(n)}</span><span class="num sc">${G.score[i]}</span></button>`).join('');
+  $('chips').innerHTML = cfg.players.map((n, i) => `<button class="chip${G.got.has(i) ? ' on' : ''}" data-p="${i}"><span>${esc(n)}</span><span class="num sc" data-pt="${G.pt}">${G.score[i]}</span></button>`).join('');
 }
 $('chips').onclick = e => {
   const b = e.target.closest('.chip'); if (!b) return;
   const i = +b.dataset.p; G.got.has(i) ? G.got.delete(i) : G.got.add(i); paintChips();
 };
 $('bNext').onclick = () => {
-  G.got.forEach(i => G.score[i]++);
-  if (ytReady) player.stopVideo();
+  G.got.forEach(i => G.score[i] += G.pt);
+  stopVid();
   G.i++;
-  G.i < G.qs.length ? question() : finish();
+  G.i < G.qs.length ? nextQ() : finish();
 };
-
-// 播放中／公布共用同一畫面，播放器 iframe 不搬動（搬動會重載、歌會斷）
 function phase(k) {
   $('pPlay').style.display = k === 'play' ? 'flex' : 'none';
   $('pRev').style.display = k === 'rev' ? 'flex' : 'none';
@@ -375,24 +452,28 @@ function phase(k) {
 
 // ===== 結束 =====
 function finish() {
-  clearInterval(tick); if (ytReady) player.stopVideo();
+  stopVid();
   const ord = cfg.players.map((n, i) => ({n, s: G.score[i]})).sort((a, b) => b.s - a.s);
-  const top = ord[0].s;
-  let rk = 0, last = null;
+  const top = ord[0].s; let rk = 0, last = null;
   $('rank').innerHTML = ord.map((p, k) => { if (p.s !== last) { rk = k + 1; last = p.s; }
     return `<div class="rk${p.s === top && top > 0 ? ' w' : ''}"><span class="num n">${rk}</span><span class="nm">${esc(p.n)}</span><span class="num s">${p.s}</span></div>`; }).join('');
-  $('endInfo').textContent = `共 ${G.qs.length} 題`;
+  $('endInfo').textContent = `共 ${G.qs.length} 題・${[...new Set(G.qs.map(q => MODES[q.mode].n))].join('、')}`;
   releaseAwake();
   show('end');
 }
 $('bReplay').onclick = () => newGame();
 $('bHome').onclick = () => { paintSetup(); show('setup'); };
-$('quit').onclick = () => { if (confirm('結束這局，看目前排名？')) finish(); };
+// 「結束」要按兩下確認（frame 裡 confirm() 不一定能用）
+$('quit').onclick = () => {
+  if ($('quit').dataset.arm) { delete $('quit').dataset.arm; $('quit').textContent = '結束'; finish(); return; }
+  $('quit').dataset.arm = 1; $('quit').textContent = '再按一次結束';
+  setTimeout(() => { delete $('quit').dataset.arm; $('quit').textContent = '結束'; }, 2500);
+};
 
-// ===== 雜項：螢幕恆亮、時間到的提示音 =====
+// ===== 雜項 =====
 async function keepAwake() { try { wake = await navigator.wakeLock?.request('screen'); } catch (e) {} }
 function releaseAwake() { try { wake?.release(); } catch (e) {} wake = null; }
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && G && !wake && $('end').classList.contains('on') === false) keepAwake(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && G && !$('end').classList.contains('on')) keepAwake(); });
 let AC = null;
 function beep() {
   try {
@@ -404,12 +485,11 @@ function beep() {
   } catch (e) {}
 }
 
-// ===== YouTube 播放器 =====
 window.onYouTubeIframeAPIReady = () => {
   player = new YT.Player('player', {
     playerVars: {playsinline: 1, rel: 0, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3},
     events: {
-      onReady: () => { ytReady = true; if (G && G.st === 'ready') player.cueVideoById({videoId: G.qs[G.i].yt, startSeconds: startOf(G.qs[G.i])}); },
+      onReady: () => { ytReady = true; if (G && G.st === 'ready' && $('game').classList.contains('on')) cue(G.qs[G.i].steps[0]); },
       onError: () => { if (G && G.st !== 'reveal' && $('game').classList.contains('on')) { toast('這首播不了，自動換一首'); skipBad(); } }
     }
   });
@@ -419,6 +499,7 @@ Promise.all([
   fetch('data/songs.json').then(r => r.json()),
   fetch('data/orig.json').then(r => r.ok ? r.json() : []).catch(() => [])
 ]).then(([d, o]) => { ALL = d; ORIG = o; paintSetup(); });
+}
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
