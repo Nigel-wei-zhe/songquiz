@@ -212,12 +212,15 @@ const MODES = {
           pts:[['1 秒',3],['3 秒',2],['5 秒',1]]},
   ladder:{n:'改編三段式', ask:'猜歌名', d:'先聽改編版；猜不到給提示再聽一次；還不行就換播原曲。',
           pts:[['改編',3],['改編＋提示',2],['原曲',1]]},
-  artist:{n:'猜原唱', ask:'猜原唱是誰', d:'聽改編版，這關不猜歌名，猜原本是誰唱的。',
+  next:  {n:'接下一句', ask:'唱出下一句', d:'原曲唱到一半停下來，誰能接著唱出下一句？唱完按公布，歌會接著播給你對答案。',
+          pts:[['接對',2]]},
+  artist:{n:'猜原唱', ask:'猜原唱是誰', d:'這關不猜歌名，猜原本是誰唱的。原曲認聲音比較簡單，改編版比較難。',
           pts:[['改編',2],['給歌名',1]]},
 };
-const ORDER = ['intro', 'ladder', 'artist'];
+const ORDER = ['intro', 'ladder', 'artist']; // 'next'（接下一句）使用者覺得太難，先不開
+const hasStop = o => o.stop != null && o.stop > 3;
 const DEF_START = 30, CLIP = 20;
-const LS = 'sqCfg2', LSP = 'sqPlayed';
+const LS = 'sqCfg3', LSP = 'sqPlayed';
 let ALL = [], ORIG = [];
 let cfg = {players:['玩家 1','玩家 2','玩家 3'], sets:SETS.map(s => s.k), modes:[...ORDER], nq:10};
 try { Object.assign(cfg, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
@@ -281,7 +284,11 @@ function buildQuestions() {
     let cand;
     if (k === 'intro') cand = fresh(ORIG.filter(o => !o.skip && (songsInSets.has(o.song) || !songsInSets.size)));
     else if (k === 'ladder') { const c = fresh(covers()); cand = [...c.filter(x => origOf(x.song)), ...c.filter(x => !origOf(x.song))]; }
-    else cand = fresh(covers());
+    else if (k === 'next') cand = fresh(ORIG.filter(o => !o.skip && hasStop(o)));
+    else { // 猜原唱：約三分之一出原曲
+      const c = fresh(covers()), o = fresh(ORIG.filter(o => !o.skip));
+      cand = []; while (c.length || o.length) { if (o.length && (cand.length % 3 === 2 || !c.length)) cand.push(o.shift()); else cand.push(c.shift()); }
+    }
     let n = 0;
     for (const x of cand) { if (n >= per[mi]) break; if (used.has(x.song)) continue; used.add(x.song); qs.push(makeQ(k, x)); n++; }
   });
@@ -296,6 +303,10 @@ function makeQ(mode, x) {
   else if (mode === 'ladder') { const o = origOf(x.song);
     steps = [{v: x, start: startOf(x), len: CLIP, pt: 3}, {v: x, start: startOf(x), len: CLIP, pt: 2, hint: h1},
              o ? {v: o, start: startOf(o), len: CLIP, pt: 1, hint: h1, tag: '原曲'} : {v: x, start: startOf(x), len: CLIP, pt: 1, hint: h1 + `<small>原唱：${esc(x.artist)}</small>`}]; }
+  else if (mode === 'next') { // 從副歌起點唱到停點；太短就往前多給 8 秒
+    const a = x.start != null && x.stop - x.start >= 3 ? x.start : Math.max(0, x.stop - 8);
+    steps = [{v: x, start: a, len: x.stop - a, pt: 2}]; }
+  else if (x.orig) steps = [{v: x, start: startOf(x), len: CLIP, pt: 1}];
   else steps = [{v: x, start: startOf(x), len: CLIP, pt: 2}, {v: x, start: startOf(x), len: CLIP, pt: 1, hint: `歌名是「${esc(x.song)}」`}];
   return {mode, song: x.song, artist: x.artist, year: x.year, style: x.orig ? '原曲' : x.style, steps, ids: steps.map(s => s.v.yt), cover: x.orig ? null : x, orig: x.orig ? x : origOf(x.song)};
 }
@@ -368,7 +379,7 @@ function playStep() {
   G.st = 'play';
   $('eq').classList.add('go');
   $('coverTx').textContent = '';
-  if (!s.hint) $('hint').innerHTML = q.mode === 'intro' ? '仔細聽！' : '大家搶答<small>先喊先答，答錯這題不能再答</small>';
+  if (!s.hint) $('hint').innerHTML = q.mode === 'next' ? '仔細聽，停下來就接唱！' : q.mode === 'intro' ? '仔細聽！' : '大家搶答<small>先喊先答，答錯這題不能再答</small>';
   $('bMain').textContent = '公布答案';
   paintStep();
   clearInterval(tick); tick = setInterval(onTick, 50);
@@ -398,7 +409,7 @@ $('bAgain').onclick = () => playStep();
 $('bBad').onclick = () => skipBad();
 function skipBad() { // 換一首同關卡的
   const q = G.qs[G.i], used = new Set(G.qs.map(x => x.song));
-  let cand = q.mode === 'intro' ? ORIG.filter(o => !o.skip) : covers();
+  let cand = q.mode === 'intro' ? ORIG.filter(o => !o.skip) : q.mode === 'next' ? ORIG.filter(o => !o.skip && hasStop(o)) : covers();
   cand = cand.filter(x => !used.has(x.song)).sort(() => Math.random() - .5);
   stopVid();
   if (cand[0]) { const nq = makeQ(q.mode, cand[0]); nq.x2 = q.x2; G.qs[G.i] = nq; toast('換了一首'); question(); }
