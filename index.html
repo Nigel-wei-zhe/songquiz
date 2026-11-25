@@ -267,8 +267,8 @@ const SETS = [ // 題庫分類（使用者定：黑杰倫／翻唱／原唱）�
 ];
 // 關卡：每一段（step）有自己的影片、長度、分數、提示
 const MODES = {
-  intro: {n:'前奏秒殺', ask:'猜歌名', d:'原曲從第一個音開始，只放 1 秒；猜不到再放 3 秒、5 秒。',
-          pts:[['1 秒',3],['3 秒',2],['5 秒',1]]},
+  intro: {n:'前奏秒殺', ask:'猜歌名', d:'原曲從第一個音開始，只放 2 秒；猜不到再放 5 秒、10 秒。',
+          pts:[['2 秒',3],['5 秒',2],['10 秒',1]]},
   ladder:{n:'改編三段式', ask:'猜歌名', d:'先聽改編版；猜不到給提示再聽一次；還不行就換播原曲。',
           pts:[['改編',3],['改編＋提示',2],['原曲',1]]},
   next:  {n:'接下一句', ask:'唱出下一句', d:'原曲唱到一半停下來，誰能接著唱出下一句？唱完按公布，歌會接著播給你對答案。',
@@ -370,7 +370,7 @@ function buildQuestions() {
 function makeQ(mode, x) {
   const chars = [...x.song], h1 = `${chars.length} 個字，第一個字「${esc(chars[0])}」`;
   let steps;
-  if (mode === 'intro') steps = [1, 3, 5].map((len, i) => ({v: x, start: x.intro || 0, len, pt: 3 - i}));
+  if (mode === 'intro') steps = [2, 5, 10].map((len, i) => ({v: x, start: x.intro || 0, len, pt: 3 - i}));
   else if (mode === 'ladder') { const o = origOf(x.song);
     steps = [{v: x, start: startOf(x), len: CLIP, pt: 3}, {v: x, start: startOf(x), len: CLIP, pt: 2, hint: h1},
              o ? {v: o, start: startOf(o), len: CLIP, pt: 1, hint: h1, tag: '原曲'} : {v: x, start: startOf(x), len: CLIP, pt: 1, hint: h1 + `<small>原唱：${esc(x.artist)}</small>`}]; }
