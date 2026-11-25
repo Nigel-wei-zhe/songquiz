@@ -66,10 +66,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 #nq{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;background:var(--glass);border:1.5px solid var(--line);border-radius:14px}
 #nq .pill{height:38px;border:0;border-radius:10px;background:none;padding:0}
 #nq .pill.on{background:#0d1a24;box-shadow:inset 0 0 0 1.5px var(--cyanL)}
-#how{margin-top:22px;color:var(--tx3);font-size:13px;line-height:1.8}
-#how b{color:var(--tx2)}
 .dockb{position:sticky;bottom:0;margin-top:auto;padding:22px 0 calc(16px + var(--pb));background:linear-gradient(transparent,var(--bg) 30%);display:flex;flex-direction:column;gap:8px}
-#sumTx{text-align:center;font-size:13px;color:var(--tx2)}
 
 /* ===== 關卡卡片 ===== */
 #card{justify-content:center;text-align:center;gap:16px}
@@ -101,7 +98,11 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 #cover.off{display:none}
 #ring{--p:0;width:124px;height:124px;border-radius:50%;display:grid;place-items:center;
   background:conic-gradient(var(--pink) calc(var(--p)*1turn),#2a1d36 0);box-shadow:0 0 20px rgba(255,47,174,.35)}
-#ring>div{width:104px;height:104px;border-radius:50%;background:#0d0712;display:grid;place-items:center;font-size:42px}
+#ring{border:0;padding:0;cursor:pointer;transition:box-shadow .2s}
+#ring:active{transform:scale(.95)}
+#ring>div{width:104px;height:104px;border-radius:50%;background:#0d0712;display:grid;place-items:center;font-size:42px;color:var(--amber)}
+#ring svg{color:var(--pinkL);filter:drop-shadow(0 0 6px var(--pink))}
+#ring.idle{background:conic-gradient(var(--pink) 1turn,#2a1d36 0);box-shadow:0 0 28px rgba(255,47,174,.55)}
 #coverTx{font-size:14px;color:var(--tx2);min-height:21px}
 #eq{display:flex;gap:4px;height:18px;align-items:flex-end}
 #eq i{width:5px;background:var(--cyan);border-radius:3px;height:30%;box-shadow:0 0 6px var(--cyan)}
@@ -117,7 +118,12 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 #hint small{display:block;font-family:"Noto Sans TC";font-weight:400;font-size:14px;color:var(--tx2);text-shadow:none;letter-spacing:0;margin-top:4px}
 #ask,#ans{margin-top:auto !important}
 .ctl{margin-top:auto;padding-top:8px;display:flex;flex-direction:column;gap:10px}
-.ctl .row button{height:48px;padding:0 8px;font-size:15px}
+#bStep{display:none;align-items:center;justify-content:space-between;height:54px;padding:0 18px;border-radius:16px;border-color:#4a3a5a;background:var(--glass2);color:#fff;font-size:17px;font-weight:700}
+#bStep.on{display:flex}
+#bStep .l{display:flex;align-items:center;gap:8px}
+#bStep .l svg{color:var(--tx2)}
+#bStep .pt{font:22px/1 "DotGothic16";color:var(--amber);font-weight:400}
+#bStep .pt::after{content:'分';font:12px "Noto Sans TC";margin-left:2px;color:var(--tx2)}
 #bBad{align-self:center}
 
 /* ===== 公布 ===== */
@@ -129,7 +135,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 #ansStyle{display:inline-block;color:var(--cyanL);font-size:12px;margin-top:6px;border:1px solid #1f4f60;border-radius:999px;padding:1px 10px}
 @keyframes pop{from{transform:scale(.6);opacity:0}}
 #bOrig{align-self:center;height:38px;padding:0 16px;font-size:14px;display:flex;align-items:center;gap:6px}
-#whoT{color:var(--tx2);font-size:13px;margin-bottom:8px;text-align:center}
+#whoT{color:var(--tx2);font-size:14px;margin-bottom:8px;text-align:center}
 #whoT b{color:var(--amber);font-family:"DotGothic16";font-weight:400;font-size:15px}
 #chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .chip{height:62px;padding:0 6px;border-radius:14px;font-size:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:var(--tx2)}
@@ -152,7 +158,6 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .rk.w .n{color:var(--amber)}
 .rk .nm{flex:1;font-size:18px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rk .s{font-size:24px}
-#endInfo{color:var(--tx3);font-size:13px;text-align:center}
 #end .dockb{margin-top:auto}
 
 #toast{position:fixed;left:50%;top:calc(16px + var(--pt));transform:translate(-50%,-8px);background:#0d1a24;border:1px solid var(--cyan);color:#fff;padding:8px 16px;border-radius:12px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:9;font-size:14px;white-space:nowrap;box-shadow:0 6px 20px #000a}
@@ -170,18 +175,18 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
   </div>
 
   <div class="sec">
-    <div class="lbl">玩家<small id="pcnt"></small></div>
+    <div class="lbl">玩家</div>
     <div id="plist"></div>
     <button id="addP"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>加一位</button>
   </div>
 
   <div class="sec">
-    <div class="lbl">關卡<small>照順序進行，可以多選</small></div>
+    <div class="lbl">關卡</div>
     <div id="modes"></div>
   </div>
 
   <div class="sec">
-    <div class="lbl">題庫<small>可以多選</small><a href="list.html">看題庫<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></a></div>
+    <div class="lbl">題庫<a href="list.html">看題庫<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></a></div>
     <div class="pills" id="sets"></div>
   </div>
 
@@ -190,10 +195,8 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
     <div id="nq"></div>
   </div>
 
-  <div id="how"><b>玩法</b>　手機放桌上播歌，大家搶著喊答案，先喊先答，<b>答錯這題就不能再答</b>。越早猜到分數越高；<b>最後一題分數加倍</b>。有人答對就按「公布答案」，點答對的人加分。</div>
 
   <div class="dockb">
-    <div id="sumTx"></div>
     <button class="big main" id="start">開始</button>
   </div>
 </section>
@@ -214,7 +217,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
   <div id="stage">
     <div id="player"></div>
     <div id="cover">
-      <div id="ring"><div class="num" id="sec">0</div></div>
+      <button id="ring" aria-label="播放這段"><div class="num"><span id="sec">0</span></div></button>
       <div id="eq"><i></i><i></i><i></i><i></i><i></i></div>
       <div id="coverTx"></div>
     </div>
@@ -224,9 +227,9 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
     <div id="steps" class="ladder"></div>
     <div id="hint" class="neonC"></div>
     <div class="ctl">
-      <div class="row"><button class="sub" id="bStep"></button><button class="sub" id="bAgain">重聽這段</button></div>
+      <button id="bStep"></button>
       <button class="big main" id="bMain">播放</button>
-      <button class="ghost" id="bBad">這首播不了？換一首</button>
+      <button class="ghost" id="bBad">換一首</button>
     </div>
   </div>
   <div id="pRev" class="pane" style="display:none">
@@ -248,7 +251,6 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
   <svg id="crown" width="44" height="34" viewBox="0 0 44 34" fill="currentColor"><path d="M4 28 1 7l11 8L22 1l10 14 11-8-3 21z"/><rect x="4" y="30" width="36" height="4" rx="1.5"/></svg>
   <div id="endT" class="neon"></div>
   <div id="rank"></div>
-  <div id="endInfo"></div>
   <div class="dockb">
     <button class="big main" id="bReplay">再來一局</button>
     <button class="ghost" id="bHome">回到設定</button>
@@ -267,13 +269,13 @@ const SETS = [ // 題庫分類（使用者定：黑杰倫／翻唱／原唱）�
 ];
 // 關卡：每一段（step）有自己的影片、長度、分數、提示
 const MODES = {
-  intro: {n:'前奏秒殺', ask:'猜歌名', d:'原曲從第一個音開始，只放 3 秒；猜不到再放 6 秒、12 秒。',
+  intro: {n:'前奏秒殺', ask:'猜歌名', d:'聽前奏猜歌名',
           pts:[['3 秒',3],['6 秒',2],['12 秒',1]]},
-  ladder:{n:'改編三段式', ask:'猜歌名', d:'先聽改編版；猜不到給提示再聽一次；還不行就換播原曲。',
+  ladder:{n:'改編三段式', ask:'猜歌名', d:'聽改編版猜歌名',
           pts:[['改編',3],['改編＋提示',2],['原曲',1]]},
-  next:  {n:'接下一句', ask:'唱出下一句', d:'原曲唱到一半停下來，誰能接著唱出下一句？唱完按公布，歌會接著播給你對答案。',
+  next:  {n:'接下一句', ask:'唱出下一句', d:'接唱下一句',
           pts:[['接對',2]]},
-  artist:{n:'猜原唱', ask:'猜原唱是誰', d:'這關不猜歌名，猜原本是誰唱的。原曲認聲音比較簡單，改編版比較難。',
+  artist:{n:'猜原唱', ask:'猜原唱是誰', d:'猜原本是誰唱的',
           pts:[['改編',2],['給歌名',1]]},
 };
 const ORDER = ['intro', 'ladder', 'artist']; // 'next'（接下一句）使用者覺得太難，先不開
@@ -305,15 +307,12 @@ const startOf = v => v.start != null ? v.start : DEF_START;
 function paintSetup() {
   const X = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
   $('plist').innerHTML = cfg.players.map((n, i) => `<div class="pl"><input value="${esc(n)}" data-i="${i}" maxlength="8" enterkeyhint="done" aria-label="玩家 ${i + 1} 名字"><button data-del="${i}" aria-label="移除 ${esc(n)}">${X}</button></div>`).join('');
-  $('pcnt').textContent = `${cfg.players.length} 位`;
   const on = ORDER.filter(k => cfg.modes.includes(k));
   $('modes').innerHTML = ORDER.map(k => { const m = MODES[k], n = on.indexOf(k);
     return `<button class="md${n >= 0 ? ' on' : ''}" data-md="${k}" aria-pressed="${n >= 0}"><span class="ck">${n >= 0 ? n + 1 : ''}</span><span class="tx"><b>${m.n}</b><span class="d">${m.d}</span></span></button>`; }).join('');
   $('sets').innerHTML = SETS.map(s => { const c = setCount(s);
     return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : ''; }).join('');
   $('nq').innerHTML = [6, 10, 15, 20].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
-  const ok = on.filter(canMode);
-  $('sumTx').innerHTML = ok.length ? `<span class="num">${cfg.nq}</span> 題・<span class="num">${ok.length}</span> 關・<span class="num">${cfg.players.length}</span> 人` : '選一個關卡和題庫';
 }
 $('plist').addEventListener('input', e => { if (e.target.dataset.i != null) { cfg.players[+e.target.dataset.i] = e.target.value; save(); } });
 $('plist').addEventListener('click', e => {
@@ -419,12 +418,24 @@ function question() {
   $('cover').classList.remove('off');
   paintStep();
   $('hint').innerHTML = '';
-  $('coverTx').textContent = '準備好了就按播放';
+  $('coverTx').textContent = '';
+  ring('play');
   $('eq').classList.remove('go');
   $('bMain').textContent = '播放';
   show('game');
   cue(q.steps[0]);
 }
+// 圓環中央：播放前▶、時間到↻（點圓環＝播這段），播放中顯示秒數
+const ICON = {
+  play: '<svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg>',
+  again: '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4.5h4.5"/></svg>',
+  next: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l6 6-6 6M13 6l6 6-6 6"/></svg>',
+};
+function ring(k) { const r = $('ring'); r.classList.toggle('idle', k !== 'num'); r.dataset.k = k;
+  if (k === 'num') { if (!$('sec')) r.firstChild.innerHTML = '<span id="sec"></span>'; }
+  else r.firstChild.innerHTML = ICON[k];
+  r.setAttribute('aria-label', k === 'again' ? '重聽這段' : '播放這段'); }
+$('ring').onclick = () => { if (G && G.st !== 'reveal') playStep(); };
 const ptOf = q => q.steps[G.step].pt * (q.x2 ? 2 : 1);
 function paintStep() {
   const q = G.qs[G.i], s = q.steps[G.step], nx = q.steps[G.step + 1];
@@ -433,12 +444,10 @@ function paintStep() {
   $('ptNow').classList.toggle('x2', !!q.x2);
   const lab = st => q.mode === 'intro' ? st.len + ' 秒' : st.tag || (st.hint ? '＋提示' : st.v.orig ? '原曲' : '改編');
   $('steps').innerHTML = q.steps.map((st, i) => `<i class="${i === G.step ? 'on' : i < G.step ? 'done' : ''}">${lab(st)}<b>${st.pt * (q.x2 ? 2 : 1)}</b></i>`).join('');
-  $('sec').textContent = s.len;
+  if ($('sec')) $('sec').textContent = s.len;
   $('ring').style.setProperty('--p', 0);
-  $('bStep').textContent = nx ? `${q.mode === 'intro' ? '再放 ' + nx.len + ' 秒' : nx.tag ? '換聽原曲' : '給提示'}・${nx.pt * (q.x2 ? 2 : 1)} 分` : '';
-  const vis = G.st !== 'ready';
-  $('bStep').style.visibility = nx && vis ? 'visible' : 'hidden';
-  $('bAgain').style.visibility = vis ? 'visible' : 'hidden';
+  $('bStep').innerHTML = nx ? `<span class="l">${ICON.next}${q.mode === 'intro' ? '再放 ' + nx.len + ' 秒' : nx.tag ? '換聽原曲' : '給提示'}</span><span class="pt">${nx.pt * (q.x2 ? 2 : 1)}</span>` : '';
+  $('bStep').classList.toggle('on', !!nx && G.st === 'pause');
   if (s.hint) $('hint').innerHTML = s.hint;
 }
 
@@ -453,7 +462,8 @@ function playStep() {
   G.st = 'play';
   $('eq').classList.add('go');
   $('coverTx').textContent = '';
-  if (!s.hint) $('hint').innerHTML = q.mode === 'next' ? '仔細聽，停下來就接唱！' : q.mode === 'intro' ? '仔細聽！' : '大家搶答<small>先喊先答，答錯這題不能再答</small>';
+  if (!s.hint) $('hint').innerHTML = '';
+  ring('num');
   $('bMain').textContent = '公布答案';
   paintStep();
   clearInterval(tick); tick = setInterval(onTick, 50);
@@ -462,8 +472,9 @@ function onTick() {
   if (!ytReady || G.st !== 'play') return;
   const s = G.qs[G.i].steps[G.step];
   if (player.getPlayerState() !== 1) { // 緩衝中不倒數；卡太久多半是被擋自動播放
-    G.wait++; $('coverTx').textContent = G.wait > 60 ? '沒聲音？點一下「重聽這段」' : '載入中…'; return;
+    G.wait++; $('coverTx').textContent = '載入中…'; if (G.wait > 60 && $('ring').dataset.k !== 'again') ring('again'); return;
   }
+  if ($('ring').dataset.k !== 'num') ring('num');
   G.wait = 0; $('coverTx').textContent = '';
   const left = Math.max(0, stopAt - player.getCurrentTime());
   $('sec').textContent = Math.ceil(left);
@@ -471,15 +482,12 @@ function onTick() {
   if (left <= 0.04) {
     player.pauseVideo(); G.st = 'pause'; clearInterval(tick);
     $('eq').classList.remove('go');
-    $('coverTx').textContent = '時間到';
-    const q = G.qs[G.i], nx = q.steps[G.step + 1];
-    if (!s.hint) $('hint').innerHTML = nx ? '猜到了嗎？<small>沒人猜到就往下一段，分數會變少</small>' : '最後機會！<small>猜不到就公布答案</small>';
+    ring('again'); paintStep();
     if (s.len > 5) beep();
   }
 }
 $('bMain').onclick = () => { G.st === 'ready' ? playStep() : reveal(); };
 $('bStep').onclick = () => { G.step++; playStep(); };
-$('bAgain').onclick = () => playStep();
 $('bBad').onclick = () => skipBad();
 function skipBad() { // 換一首同關卡的
   const q = G.qs[G.i], used = new Set(G.qs.map(x => x.song));
@@ -510,7 +518,7 @@ function reveal() {
   const o = q.orig;
   $('bOrig').style.display = o && !playing.v.orig ? '' : 'none';
   $('prog').firstChild.style.width = ((G.i + 1) / G.qs.length * 100) + '%';
-  $('whoT').innerHTML = `誰答對了？答對 <b>+${G.pt}</b> 分（可以點多位）`;
+  $('whoT').innerHTML = `誰答對？<b>+${G.pt}</b>`;
   paintChips();
 }
 $('bOrig').onclick = () => { const o = G.qs[G.i].orig; if (!o) return;
@@ -549,7 +557,6 @@ function finish() {
   $('endT').textContent = top <= 0 ? '大家都沒得分' : champs.length > 1 ? `${champs.length} 人並列第一` : champs[0].n;
   $('crown').style.display = top > 0 ? '' : 'none';
   $('endT').style.animation = 'none'; void $('endT').offsetWidth; $('endT').style.animation = '';
-  $('endInfo').textContent = `共 ${G.qs.length} 題・${[...new Set(G.qs.map(q => MODES[q.mode].n))].join('、')}`;
   releaseAwake();
   show('end');
 }
