@@ -128,7 +128,6 @@ body.skipv #bar,body.skipv #chips{display:none}
 </div></div>
 <script>
 {
-const COVER = ['滾石唱片 ROCK RECORDS', 'Capybara96', 'Priscilla Abby 蔡恩雨', '尋人啟事 The Wanted']; // 跟遊戲的「翻唱」一致
 const SRC = {'滾石唱片 ROCK RECORDS':'滾石致敬', 'Capybara96':'Capybara96', 'Priscilla Abby 蔡恩雨':'蔡恩雨', '尋人啟事 The Wanted':'尋人啟事'};
 const I = {
   play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
@@ -143,7 +142,7 @@ const mmss = t => t == null ? '—' : `${Math.floor(t / 60)}:${String(Math.floor
 const firstArtist = a => (a || '').replace(/[（(].*?[）)]/g, '').split(/[、,&/]| feat/)[0].trim() || '其他';
 let ALL = [], ORIG = [], tab = 'bj', byArtist = true, skipView = false;
 let player = null, ready = false, pending = null, cur = null, playing = false;
-const rows = k => k === 'orig' ? ORIG : ALL.filter(x => k === 'bj' ? x.set === '黑杰倫' : COVER.includes(x.set));
+const rows = k => k === 'orig' ? ORIG : ALL.filter(x => (x.set === '黑杰倫') === (k === 'bj'));
 const origOf = song => ORIG.find(o => o.song === song && !o.skip);
 const coverOf = song => ALL.find(x => x.song === song && !x.skip);
 const startOf = v => v.start != null ? v.start : (v.orig ? v.intro || 0 : 30);

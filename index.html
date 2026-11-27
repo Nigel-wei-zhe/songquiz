@@ -135,6 +135,17 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 #ansStyle{display:inline-block;color:var(--cyanL);font-size:12px;margin-top:6px;border:1px solid #1f4f60;border-radius:999px;padding:1px 10px}
 @keyframes pop{from{transform:scale(.6);opacity:0}}
 #bOrig{align-self:center;height:38px;padding:0 16px;font-size:14px;display:flex;align-items:center;gap:6px}
+/* 回報（預設收合） */
+#fb{display:flex;flex-direction:column;align-items:center;gap:6px}
+#fbT{display:flex;align-items:center;gap:5px;padding:6px 12px}
+#fbT.has{color:var(--amber)}
+#fbBox{display:none;flex-direction:column;align-items:center;gap:8px}
+#fbBox.open{display:flex}
+#fbWho{font-size:12px;color:var(--tx3);text-align:center}
+#fbTags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+#fbTags .pill{height:36px;padding:0 11px;font-size:13px}
+.fbCopy{align-self:center}
+#fbOut{height:120px;font:12px monospace;color:#fff;background:var(--glass);border:1.5px solid var(--line);border-radius:12px;padding:8px;user-select:text;-webkit-user-select:text}
 #whoT{color:var(--tx2);font-size:14px;margin-bottom:8px;text-align:center}
 #whoT b{color:var(--amber);font-family:"DotGothic16";font-weight:400;font-size:15px}
 #chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
@@ -191,6 +202,11 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
   </div>
 
   <div class="sec">
+    <div class="lbl">年代<small>各年代平均出題</small></div>
+    <div class="pills" id="eras"></div>
+  </div>
+
+  <div class="sec">
     <div class="lbl">題數</div>
     <div id="nq"></div>
   </div>
@@ -198,6 +214,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 
   <div class="dockb">
     <button class="big main" id="start">開始</button>
+    <button class="ghost fbCopy" hidden></button>
   </div>
 </section>
 
@@ -241,6 +258,10 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
     </div>
     <button class="sub" id="bOrig"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>聽原曲對照</button>
     <div id="who"><div id="whoT"></div><div id="chips"></div></div>
+    <div id="fb">
+      <button class="ghost" id="fbT" aria-expanded="false" aria-controls="fbBox"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h13l-2.5 4.5L18 13H5"/></svg>回報</button>
+      <div id="fbBox"><div id="fbWho"></div><div id="fbTags"></div></div>
+    </div>
     <div class="ctl"><button class="big main" id="bNext">下一題</button></div>
   </div>
 </section>
@@ -254,6 +275,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
   <div class="dockb">
     <button class="big main" id="bReplay">再來一局</button>
     <button class="ghost" id="bHome">回到設定</button>
+    <button class="ghost fbCopy" hidden></button>
   </div>
 </section>
 
@@ -262,11 +284,13 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 <script>
 {
 // ===== 資料與設定 =====
-const SETS = [ // 題庫分類（使用者定：黑杰倫／翻唱／原唱）；src 對 songs.json 的 set，原唱是 orig.json
-  {k:'bj',   n:'黑杰倫', src:['黑杰倫']},
-  {k:'cover',n:'翻唱',   src:['滾石唱片 ROCK RECORDS', 'Capybara96', 'Priscilla Abby 蔡恩雨', '尋人啟事 The Wanted']},
+const SETS = [ // 題庫分類（使用者定：黑杰倫／翻唱／原唱）；前兩類在 songs.json，原唱是 orig.json
+  {k:'bj',   n:'黑杰倫'},
+  {k:'cover',n:'翻唱'}, // 黑杰倫以外的改編都算
   {k:'orig', n:'原唱'},
 ];
+// 年代：以原曲首次發行年分；同一首歌的原曲、改編共用年份
+const ERAS = [{k:'e80', n:'80 年代以前', to:1989}, {k:'e90', n:'90 年代', to:1999}, {k:'e00', n:'2000 年代', to:2009}, {k:'e10', n:'2010 後', to:9999}];
 // 關卡：每一段（step）有自己的影片、長度、分數、提示
 const MODES = {
   intro: {n:'前奏秒殺', ask:'猜歌名', d:'聽前奏猜歌名',
@@ -280,12 +304,14 @@ const MODES = {
 };
 const ORDER = ['intro', 'ladder', 'artist']; // 'next'（接下一句）使用者覺得太難，先不開
 const hasStop = o => o.stop != null && o.stop > 3;
+const hasIntro = o => !o.mvOnly; // 只有 MV 的新歌開頭可能是片頭，不拿來猜前奏
 const DEF_START = 30, CLIP = 20;
-const LS = 'sqCfg3', LSP = 'sqPlayed';
+const LS = 'sqCfg3', LSP = 'sqPlayed', LSF = 'sqFeedback';
 let ALL = [], ORIG = [];
-let cfg = {players:['玩家 1','玩家 2','玩家 3'], sets:SETS.map(s => s.k), modes:[...ORDER], nq:10};
+let cfg = {players:['玩家 1','玩家 2','玩家 3'], sets:SETS.map(s => s.k), eras:ERAS.map(e => e.k), modes:[...ORDER], nq:10};
 try { Object.assign(cfg, JSON.parse(localStorage.getItem(LS) || '{}')); } catch (e) {}
 if (!cfg.sets.length || cfg.sets.some(k => !SETS.some(s => s.k === k))) cfg.sets = SETS.map(s => s.k); // 舊版分組 → 全選
+if (!cfg.eras?.length || cfg.eras.some(k => !ERAS.some(e => e.k === k))) cfg.eras = ERAS.map(e => e.k);
 let G = null, player = null, ytReady = false, loaded = '', stopAt = 0, tick = null, wake = null;
 window.__dbg = {get G() { return G; }, get ORIG() { return ORIG; }}; // 測試用
 
@@ -294,12 +320,18 @@ const show = id => document.querySelectorAll('.scr').forEach(s => s.classList.to
 const toast = t => { const m = $('toast'); m.textContent = t; m.classList.add('on'); clearTimeout(m._t); m._t = setTimeout(() => m.classList.remove('on'), 1800); };
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const save = () => { try { localStorage.setItem(LS, JSON.stringify(cfg)); } catch (e) {} };
-const setOf = x => SETS.find(s => s.src.includes(x.set || x.channel));
-const covers = () => ALL.filter(x => !x.skip && cfg.sets.includes(setOf(x)?.k));
-const origs = () => cfg.sets.includes('orig') ? ORIG.filter(o => !o.skip) : [];
+const setOf = x => SETS[(x.set || x.channel) === '黑杰倫' ? 0 : 1];
+let YEAR = {};
+const yearOf = x => x.year || YEAR[x.song];
+const eraOf = x => { const y = yearOf(x); return y ? ERAS.find(e => y <= e.to).k : ''; };
+// 沒有年份的歌只在年代全選時出
+const inEra = x => cfg.eras.length === ERAS.length || cfg.eras.includes(eraOf(x));
+const covers = () => ALL.filter(x => !x.skip && cfg.sets.includes(setOf(x).k) && inEra(x));
+const origs = () => cfg.sets.includes('orig') ? ORIG.filter(o => !o.skip && inEra(o)) : [];
+const eraCount = e => new Set([...ALL, ...ORIG].filter(x => !x.skip && eraOf(x) === e.k).map(x => x.song)).size;
 const setCount = s => s.k === 'orig' ? ORIG.filter(o => !o.skip).length : ALL.filter(x => !x.skip && setOf(x) === s).length;
 // 各關需要的題庫：前奏秒殺只用原唱、改編三段式只用改編、猜原唱兩種都行
-const canMode = k => k === 'intro' || k === 'next' ? origs().length > 0 : k === 'ladder' ? covers().length > 0 : covers().length + origs().length > 0;
+const canMode = k => k === 'intro' ? origs().some(hasIntro) : k === 'next' ? origs().length > 0 : k === 'ladder' ? covers().length > 0 : covers().length + origs().length > 0;
 const origOf = song => ORIG.find(o => o.song === song && !o.skip);
 const startOf = v => v.start != null ? v.start : DEF_START;
 
@@ -312,6 +344,8 @@ function paintSetup() {
     return `<button class="md${n >= 0 ? ' on' : ''}" data-md="${k}" aria-pressed="${n >= 0}"><span class="ck">${n >= 0 ? n + 1 : ''}</span><span class="tx"><b>${m.n}</b><span class="d">${m.d}</span></span></button>`; }).join('');
   $('sets').innerHTML = SETS.map(s => { const c = setCount(s);
     return c ? `<button class="pill${cfg.sets.includes(s.k) ? ' on' : ''}" data-set="${s.k}">${s.n}<small>${c}</small></button>` : ''; }).join('');
+  $('eras').innerHTML = ERAS.map(e => { const c = eraCount(e);
+    return `<button class="pill${cfg.eras.includes(e.k) ? ' on' : ''}" data-era="${e.k}">${e.n}<small>${c}</small></button>`; }).join('');
   $('nq').innerHTML = [6, 10, 15, 20].map(n => `<button class="pill${cfg.nq === n ? ' on' : ''}" data-nq="${n}">${n} 題</button>`).join('');
 }
 $('plist').addEventListener('input', e => { if (e.target.dataset.i != null) { cfg.players[+e.target.dataset.i] = e.target.value; save(); } });
@@ -326,6 +360,7 @@ $('setup').addEventListener('click', e => {
   const tog = (arr, k) => { const i = arr.indexOf(k); i >= 0 ? arr.splice(i, 1) : arr.push(k); };
   if (b.dataset.md) tog(cfg.modes, b.dataset.md);
   else if (b.dataset.set) tog(cfg.sets, b.dataset.set);
+  else if (b.dataset.era) tog(cfg.eras, b.dataset.era);
   else if (b.dataset.nq) cfg.nq = +b.dataset.nq;
   else return;
   save(); paintSetup();
@@ -334,6 +369,7 @@ $('start').onclick = () => {
   cfg.players = cfg.players.map((n, i) => n.trim() || '玩家 ' + (i + 1)); save();
   if (!cfg.modes.length) return toast('至少選一個關卡');
   if (!cfg.sets.length) return toast('至少選一個題庫');
+  if (!cfg.eras.length) return toast('至少選一個年代');
   const bad = cfg.modes.filter(k => !canMode(k));
   if (bad.length === cfg.modes.length) return toast(bad.includes('intro') ? '前奏秒殺要勾「原唱」' : '改編三段式要勾「黑杰倫」或「翻唱」');
   if (bad.length) toast(`略過${bad.map(k => MODES[k].n).join('、')}（題庫沒勾到）`);
@@ -341,6 +377,11 @@ $('start').onclick = () => {
 };
 
 // ===== 出題 =====
+// 配額：每局同一原唱最多約 1/5 的題數（至少 2 題）；合唱的每位都算一次
+const singers = x => String(x.artist).replace(/[（(].*?[）)]/g, '').split(/[、,&\/]| feat\.? /).map(a => a.trim()).filter(Boolean);
+const artistCap = () => Math.max(2, Math.ceil(cfg.nq / 5));
+const countSingers = qs => qs.reduce((m, q) => { singers(q).forEach(a => m[a] = (m[a] || 0) + 1); return m; }, {});
+const underCap = (x, count) => singers(x).every(a => (count[a] || 0) < artistCap());
 function buildQuestions() {
   let played = [];
   try { played = JSON.parse(localStorage.getItem(LSP) || '[]'); } catch (e) {}
@@ -352,7 +393,7 @@ function buildQuestions() {
     return [...sh(f), ...sh(o)]; };
   modes.forEach((k, mi) => {
     let cand;
-    if (k === 'intro') cand = fresh(origs());
+    if (k === 'intro') cand = fresh(origs().filter(hasIntro));
     else if (k === 'ladder') { const c = fresh(covers()); cand = [...c.filter(x => origOf(x.song)), ...c.filter(x => !origOf(x.song))]; }
     else if (k === 'next') cand = fresh(origs().filter(hasStop));
     else { // 猜原唱：約三分之一出原曲
@@ -360,7 +401,15 @@ function buildQuestions() {
       cand = []; while (c.length || o.length) { if (o.length && (cand.length % 3 === 2 || !c.length)) cand.push(o.shift()); else cand.push(c.shift()); }
     }
     let n = 0;
-    for (const x of cand) { if (n >= per[mi]) break; if (used.has(x.song)) continue; used.add(x.song); qs.push(makeQ(k, x)); n++; }
+    // 每次從目前出最少的年代挑（各年代平均）；先照配額，題庫太窄湊不滿時第二輪放寬
+    for (const strict of [true, false]) while (n < per[mi]) {
+      const eras = {}; qs.forEach(q => eras[q.era] = (eras[q.era] || 0) + 1);
+      const load = x => eraOf(x) ? eras[eraOf(x)] || 0 : Infinity; // 沒年份的墊後
+      let x = null;
+      for (const c of cand) if (!used.has(c.song) && (!strict || underCap(c, countSingers(qs))) && (!x || load(c) < load(x))) x = c;
+      if (!x) break;
+      used.add(x.song); qs.push(makeQ(k, x)); n++;
+    }
   });
   if (qs.length) qs[qs.length - 1].x2 = true;
   try { localStorage.setItem(LSP, JSON.stringify([...played.filter(y => !qs.some(q => q.ids.includes(y))), ...qs.flatMap(q => q.ids)].slice(-400))); } catch (e) {}
@@ -378,7 +427,7 @@ function makeQ(mode, x) {
     steps = [{v: x, start: a, len: x.stop - a, pt: 2}]; }
   else if (x.orig) steps = [{v: x, start: startOf(x), len: CLIP, pt: 1}];
   else steps = [{v: x, start: startOf(x), len: CLIP, pt: 2}, {v: x, start: startOf(x), len: CLIP, pt: 1, hint: `歌名是「${esc(x.song)}」`}];
-  return {mode, song: x.song, artist: x.artist, year: x.year, style: x.orig ? '原曲' : x.style, steps, ids: steps.map(s => s.v.yt), cover: x.orig ? null : x, orig: x.orig ? x : origOf(x.song)};
+  return {mode, song: x.song, artist: x.artist, year: yearOf(x), era: eraOf(x), style: x.orig ? '原曲' : x.style, steps, ids: steps.map(s => s.v.yt), cover: x.orig ? null : x, orig: x.orig ? x : origOf(x.song)};
 }
 
 function newGame() {
@@ -488,11 +537,14 @@ function onTick() {
 }
 $('bMain').onclick = () => { G.st === 'ready' ? playStep() : reveal(); };
 $('bStep').onclick = () => { G.step++; playStep(); };
-$('bBad').onclick = () => skipBad();
+$('bBad').onclick = () => { const q = G.qs[G.i]; record(q.steps[0].v, q.mode, 'swap'); skipBad(); };
 function skipBad() { // 換一首同關卡的
   const q = G.qs[G.i], used = new Set(G.qs.map(x => x.song));
-  let cand = q.mode === 'intro' ? ORIG.filter(o => !o.skip) : q.mode === 'next' ? ORIG.filter(o => !o.skip && hasStop(o)) : covers();
+  let cand = q.mode === 'intro' ? origs().filter(hasIntro) : q.mode === 'next' ? origs().filter(hasStop) : covers();
   cand = cand.filter(x => !used.has(x.song)).sort(() => Math.random() - .5);
+  const count = countSingers(G.qs.filter((_, i) => i !== G.i));
+  const rank = x => (underCap(x, count) ? 0 : 2) + (eraOf(x) === q.era ? 0 : 1); // 先守配額，再找同年代
+  cand.sort((a, b) => rank(a) - rank(b));
   stopVid();
   if (cand[0]) { const nq = makeQ(q.mode, cand[0]); nq.x2 = q.x2; G.qs[G.i] = nq; toast('換了一首'); question(); }
   else { G.qs.splice(G.i, 1); $('qt').textContent = G.qs.length; G.i < G.qs.length ? question() : finish(); }
@@ -503,7 +555,7 @@ function reveal() {
   const q = G.qs[G.i];
   clearInterval(tick);
   if (G.st !== 'play') player.playVideo(); // 公布時讓歌繼續播
-  G.st = 'reveal'; G.pt = ptOf(q);
+  G.st = 'reveal'; G.pt = ptOf(q); G.heardOrig = false;
   phase('rev');
   $('cover').classList.add('off');
   $('eq').classList.remove('go');
@@ -520,10 +572,11 @@ function reveal() {
   $('prog').firstChild.style.width = ((G.i + 1) / G.qs.length * 100) + '%';
   $('whoT').innerHTML = `誰答對？<b>+${G.pt}</b>`;
   paintChips();
+  foldFb();
 }
 $('bOrig').onclick = () => { const o = G.qs[G.i].orig; if (!o) return;
   player.loadVideoById({videoId: o.yt, startSeconds: startOf(o)}); loaded = o.yt;
-  $('ansStyle').textContent = '原曲'; $('bOrig').style.display = 'none'; };
+  $('ansStyle').textContent = '原曲'; $('bOrig').style.display = 'none'; G.heardOrig = true; foldFb(); };
 function paintChips() {
   $('chips').innerHTML = cfg.players.map((n, i) => `<button class="chip${G.got.has(i) ? ' on' : ''}" data-p="${i}" aria-pressed="${G.got.has(i)}"><span>${esc(n)}</span><span class="num sc" data-pt="${G.pt}">${G.score[i]}</span></button>`).join('');
   const last = G.i + 1 >= G.qs.length;
@@ -535,6 +588,7 @@ $('chips').onclick = e => {
   const i = +b.dataset.p; G.got.has(i) ? G.got.delete(i) : G.got.add(i); paintChips();
 };
 $('bNext').onclick = () => {
+  if (!G.got.size) { const q = G.qs[G.i]; record(q.steps[0].v, q.mode, 'miss'); }
   G.got.forEach(i => G.score[i] += G.pt);
   stopVid();
   G.i++;
@@ -545,6 +599,51 @@ function phase(k) {
   $('pRev').style.display = k === 'rev' ? 'flex' : 'none';
   $('quit').style.visibility = k === 'play' ? 'visible' : 'hidden';
 }
+
+// ===== 回報 =====
+// 紀錄存手機（以影片 ID 彙整）：tags 是手動回報，swap／error／miss 自動累計
+const TAGS = [['start', '起點不好'], ['unknown', '認不出來'], ['drop', '刪掉這首'], ['data', '資料錯了']];
+let FB = {};
+try { FB = JSON.parse(localStorage.getItem(LSF) || '{}') || {}; } catch (e) {}
+const saveFb = () => { try { localStorage.setItem(LSF, JSON.stringify(FB)); } catch (e) {} paintCopy(); };
+const videoOf = yt => ORIG.find(x => x.yt === yt) || ALL.find(x => x.yt === yt);
+const entry = v => FB[v.yt] || (FB[v.yt] = {t: v.orig ? '原曲' : '改編', song: v.song, tags: {}});
+const where = (v, mode) => `${MODES[mode].n}@${mode === 'intro' ? v.intro || 0 : startOf(v)}`;
+function record(v, mode, k) { const r = entry(v); r[k] = (r[k] || 0) + 1; r.at = where(v, mode); saveFb(); }
+// 手動回報對象＝這題出的版本；按過「聽原曲對照」就改成原曲
+const fbVideo = () => { const q = G.qs[G.i]; return G.heardOrig ? q.orig : q.steps[0].v; };
+function paintFb() {
+  const v = fbVideo(), tags = FB[v.yt]?.tags || {};
+  $('fbWho').textContent = `針對${v.orig ? '原曲' : '改編'}版「${v.song}」`;
+  $('fbTags').innerHTML = TAGS.map(([k, n]) => `<button class="pill${tags[k] ? ' on' : ''}" data-fb="${k}" aria-pressed="${!!tags[k]}">${n}</button>`).join('');
+  $('fbT').classList.toggle('has', Object.keys(tags).length > 0);
+}
+function foldFb(open = false) { $('fbBox').classList.toggle('open', open); $('fbT').setAttribute('aria-expanded', open); paintFb(); }
+$('fbT').onclick = () => { foldFb(!$('fbBox').classList.contains('open')); if ($('fbBox').classList.contains('open')) $('fb').scrollIntoView({block: 'nearest'}); };
+$('fbTags').onclick = e => {
+  const k = e.target.closest('[data-fb]')?.dataset.fb; if (!k) return;
+  const v = fbVideo(), r = entry(v), had = r.tags[k];
+  if (had) delete r.tags[k]; else r.tags[k] = where(v, G.qs[G.i].mode);
+  if (!Object.keys(r.tags).length && !r.swap && !r.error && !r.miss) delete FB[v.yt];
+  saveFb(); foldFb(); toast(had ? '已取消' : '已記下');
+};
+function paintCopy() {
+  const n = Object.keys(FB).length;
+  document.querySelectorAll('.fbCopy').forEach(b => { b.hidden = !n; b.textContent = `複製回報（${n} 首）`; });
+}
+function fbText() {
+  const rows = Object.entries(FB).map(([yt, r]) => [r.t, yt, r.song,
+    TAGS.filter(([k]) => r.tags[k]).map(([k, n]) => `${n}（${r.tags[k]}）`).join('、'), r.swap || '', r.error || '', r.miss || '', r.at || ''].join('\t'));
+  return '#songquiz-feedback v1\n類型\tyt\t歌名\t回報\t換掉\t播不了\t沒人答對\t最後自動紀錄\n' + rows.join('\n');
+}
+document.querySelectorAll('.fbCopy').forEach(b => b.onclick = async () => {
+  const txt = fbText();
+  try { await navigator.clipboard.writeText(txt); toast('已複製，貼給 Claude 就好'); }
+  catch (e) { // 剪貼簿被擋：顯示文字讓人長按複製
+    let o = $('fbOut'); if (!o) { o = document.createElement('textarea'); o.id = 'fbOut'; o.readOnly = true; }
+    o.value = txt; b.after(o); o.select(); toast('請長按文字全選複製'); }
+});
+paintCopy();
 
 // ===== 結束 =====
 function finish() {
@@ -589,7 +688,7 @@ window.onYouTubeIframeAPIReady = () => {
     playerVars: {playsinline: 1, rel: 0, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3},
     events: {
       onReady: () => { ytReady = true; if (G && G.st === 'ready' && $('game').classList.contains('on')) cue(G.qs[G.i].steps[0]); },
-      onError: () => { if (G && G.st !== 'reveal' && $('game').classList.contains('on')) { toast('這首播不了，自動換一首'); skipBad(); } }
+      onError: () => { if (G && G.st !== 'reveal' && $('game').classList.contains('on')) { const q = G.qs[G.i]; record(videoOf(loaded) || q.steps[G.step].v, q.mode, 'error'); toast('這首播不了，自動換一首'); skipBad(); } }
     }
   });
 };
@@ -597,7 +696,9 @@ window.onYouTubeIframeAPIReady = () => {
 Promise.all([
   fetch('data/songs.json').then(r => r.json()),
   fetch('data/orig.json').then(r => r.ok ? r.json() : []).catch(() => [])
-]).then(([d, o]) => { ALL = d; ORIG = o; paintSetup(); });
+]).then(([d, o]) => { ALL = d; ORIG = o;
+  YEAR = Object.fromEntries([...ALL, ...ORIG].filter(x => x.year).map(x => [x.song, x.year]));
+  paintSetup(); });
 }
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
